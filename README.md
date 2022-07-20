@@ -68,7 +68,7 @@ typecheck: para evaluar que el codigo typescript no tenga errores. Se puede ejec
 
 lint: para correr eslint dentro del cliente
 
+pre-commit: corre tanto typechecks como lint
 
 GitHooks:
-
-antes de realizar un commit se ejecutan los script typecheck y lint de la carpeta client
+  antes de realizar un commit se ejecutan el script pre-commit
