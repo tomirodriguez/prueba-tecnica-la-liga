@@ -1,21 +1,19 @@
+import { Flex } from '@chakra-ui/react';
 import { useState } from 'react';
 
-export const LogiN = () => {
+export const LoginView = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   return (
-    <div
-      style={{
-        width: '100%',
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        padding: '30px',
-        backgroundColor: '#e4e4e4',
-      }}
+    <Flex
+      w="full"
+      h="100vh"
+      bg="bg"
+      flexDir="column"
+      justify="center"
+      align="center"
+      padding={30}
     >
       <div>
         <u>
@@ -90,6 +88,6 @@ export const LogiN = () => {
           }}
         />
       </form>
-    </div>
+    </Flex>
   );
 };

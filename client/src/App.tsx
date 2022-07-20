@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { LogiN } from './views/Login';
+import { LoginView } from './views/Login';
 
 type Props = {};
 
 export const App: FC<Props> = () => {
   return (
     <div>
-      <LogiN />
+      <LoginView />
     </div>
   );
 };
