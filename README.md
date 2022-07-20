@@ -55,4 +55,6 @@ yarn && yarn start
 
 ## Memoria
 
-**_ Puedes documentar aquí la memoria de tu prueba _**
+Custom scripts:
+
+typecheck: para evaluar que el codigo typescript no tenga errores.

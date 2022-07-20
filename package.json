@@ -3,5 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "tomirodriguez <tomirodriguez.89@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "typecheck:client": "cd client && tsc",
+    "typecheck:server": "cd server && tsc",
+    "typecheck": "yarn typecheck:server && yarn typecheck:client"
+  }
 }
