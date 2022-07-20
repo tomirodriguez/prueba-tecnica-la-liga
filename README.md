@@ -62,6 +62,13 @@ Se utilizara solamente el typecheck del cliente para agilizar los commits, sabie
 
 Eslint: se instalaron las dependencias necesarias y se realizo la configuracion correspondiente para trabajar con prettier.
 
+Redux: Para el manejo de estados se utiliza redux y react-redux
+
+Saga: Para aplicar middlewares se utilizara redux-saga
+
+Axios: Para la llamada a la api
+
+
 Custom scripts:
 
 typecheck: para evaluar que el codigo typescript no tenga errores. Se puede ejecutar en todo el proyecto como solo en el cliente o servidor con algunas de sus variantes.
@@ -69,6 +76,9 @@ typecheck: para evaluar que el codigo typescript no tenga errores. Se puede ejec
 lint: para correr eslint dentro del cliente
 
 pre-commit: corre tanto typechecks como lint
+
+
+
 
 GitHooks:
   antes de realizar un commit se ejecutan el script pre-commit
