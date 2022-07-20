@@ -2,13 +2,13 @@ import axios from 'axios';
 import { AuthenticateType, AuthorizationResponse } from './types';
 
 export const authenticate: AuthenticateType = async ({ email, password }) => {
-  const { REACT_APP_API } = process.env;
+  const { REACT_APP_API_URL } = process.env;
   const response = await axios
     .post<AuthorizationResponse>(
       'login',
       { email, password },
       {
-        baseURL: REACT_APP_API,
+        baseURL: REACT_APP_API_URL,
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',

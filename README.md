@@ -82,3 +82,8 @@ pre-commit: corre tanto typechecks como lint
 
 GitHooks:
   antes de realizar un commit se ejecutan el script pre-commit
+
+
+environment variables:
+
+template en .env.template
