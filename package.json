@@ -8,9 +8,16 @@
     "typecheck:client": "cd client && tsc",
     "typecheck:server": "cd server && tsc",
     "typecheck": "yarn typecheck:server && yarn typecheck:client",
+    "lint": "eslint client --max-warnings=0",
     "prepare": "husky install"
   },
   "devDependencies": {
-    "husky": "^8.0.0"
+    "@typescript-eslint/eslint-plugin": "^5.30.7",
+    "@typescript-eslint/parser": "^5.30.7",
+    "eslint": "^8.20.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-react": "^7.30.1",
+    "husky": "^8.0.0",
+    "prettier": "^2.7.1"
   }
 }

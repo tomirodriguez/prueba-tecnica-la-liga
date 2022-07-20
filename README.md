@@ -60,6 +60,15 @@ Librerias:
 Husky: para ejectuar git hooks. Permite que el codigo que querramos subir al repositorio este libre de errores, impidiendo la subida/commit si los hubiese.
 Se utilizara solamente el typecheck del cliente para agilizar los commits, sabiendo que el servidor no sera modificado y cumple con los requerimientos.
 
+Eslint: se instalaron las dependencias necesarias y se realizo la configuracion correspondiente para trabajar con prettier.
+
 Custom scripts:
 
 typecheck: para evaluar que el codigo typescript no tenga errores. Se puede ejecutar en todo el proyecto como solo en el cliente o servidor con algunas de sus variantes.
+
+lint: para correr eslint dentro del cliente
+
+
+GitHooks:
+
+antes de realizar un commit se ejecutan los script typecheck y lint de la carpeta client
