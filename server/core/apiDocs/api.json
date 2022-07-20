@@ -1,0 +1,434 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "LaLiga challenge API",
+    "description": "Description of all the endpoints you can use.<h3>Usage</h3>\n<ul><li>To use private Endpoints you must be authenticated with the <b>'Authorize'</b> button.</li><li>The value to become authorized must be <b>'Bearer {{your-login-token}}'</b>.</li><li>To get your <b>{{your-login-token}}</b> value, just <b>'Try it out'</b> the /login Endpoint below.</li>",
+    "version": "1.0.0"
+  },
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "summary": "Retrieve the token to authorize requests",
+        "description": "Use this token with the 'Bearer' prefix: 'Bearer {{your-login-token}}'",
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "description": "The user's email and password. This values must be 'fake.user@fake.com' | '123'",
+          "type": "object",
+          "required": [
+            "email", "password"
+          ],
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+          }
+        }],
+        "tags": [
+          "Authorization"
+        ],
+        "responses": {
+          "200": {
+            "description": "The token to use over API",
+            "schema": {
+              "properties": {
+                "token": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFp..."
+              }
+            }
+          },
+          "401": {
+            "description": "Unexpected error",
+            "schema": {
+              "example": {
+                "status": 401,
+                "message": "Invalid User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/clubs": {
+      "get": {
+        "summary": "List of available clubs",
+        "description": "This is a private API call and you must be authenticated with Bearer {{token}}.\nBasic information about all available clubs: name, foundationDate, avatar and favourite.",
+        "parameters": [{
+            "name": "offset",
+            "in": "query",
+            "description": "Offset to paginate.",
+            "type": "number"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit to paginate.",
+            "type": "number"
+          },
+          {
+            "name": "favorite",
+            "in": "query",
+            "description": "Clubs filtered by favorite",
+            "type": "boolean"
+          },
+          {
+            "name": "name_like",
+            "in": "query",
+            "description": "Clubs filtered by name if {{string}} is included",
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Clubs"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of clubs",
+            "schema": {
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Club"
+                  }
+                },
+                "total": {
+                  "type": "integer"
+                }
+              },
+              "example": {
+                "results": [{
+                    "id": "da898936-252f-4aa0-8222-9648c94b2e62",
+                    "name": "Boca Juniors",
+                    "foundationDate": "2009-03-16T01:14:08.587Z",
+                    "avatar": "https://placeimg.com/314/290",
+                    "favorite": false
+                  },
+                  {
+                    "id": "5c0ae896-6935-45c2-8430-077a0872f79d",
+                    "name": "Barcelona",
+                    "foundationDate": "1954-12-20T20:47:18.090Z",
+                    "avatar": "https://placeimg.com/297/314",
+                    "favorite": true
+                  },
+                  {
+                    "id": "c471a420-0f63-4852-a32e-5acebeeae22a",
+                    "name": "Valencia",
+                    "foundationDate": "1956-01-02T00:26:07.160Z",
+                    "avatar": "https://placeimg.com/291/303",
+                    "favorite": false
+                  },
+                  {
+                    "id": "b1e580c5-3646-4034-871d-61e6fc8bf4eb",
+                    "name": "Palmeiras",
+                    "foundationDate": "1979-09-27T06:44:55.674Z",
+                    "avatar": "https://placeimg.com/311/303",
+                    "favorite": false
+                  },
+                  {
+                    "id": "6954bf0a-42b4-485a-bc02-cd99dce09f99",
+                    "name": "West Bromwich Albion",
+                    "foundationDate": "1951-09-13T07:50:32.982Z",
+                    "avatar": "https://placeimg.com/299/316",
+                    "favorite": true
+                  }
+                ],
+                "total": 20
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "example": {
+                "status": 400,
+                "message": "Invalid pagination values"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "example": {
+                "status": 403,
+                "message": "Invalid Token"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/clubs/{club}": {
+      "get": {
+        "summary": "Retrieve a specific club info",
+        "description": "This is a private API call and you must be authenticated with Bearer {{token}}.\nInformation about the club and the club's players are included in this api response.\nDue to json-server limitations, if club is not found response will always return status 200 and empty object ({ })",
+        "parameters": [{
+          "name": "club",
+          "in": "path",
+          "description": "The club id",
+          "type": "string"
+        }],
+        "tags": [
+          "Clubs"
+        ],
+        "responses": {
+          "200": {
+            "description": "Club information with players and each player stats",
+            "schema": {
+              "$ref": "#/definitions/ClubDTO"
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update a specific club info",
+        "description": "This is a private API call and you must be authenticated with Bearer {{token}}.\nDue to json-server limitations, if club is not found response will always return status 200 and empty object ({ })",
+        "parameters": [{
+          "name": "club",
+          "in": "path",
+          "description": "The club id",
+          "type": "string"
+        }, {
+          "type": "object",
+          "name": "body",
+          "in": "body",
+          "description": "The new club's favorite state",
+          "properties": {
+            "favorite": {
+              "type": "boolean"
+            }
+          }
+        }],
+        "tags": [
+          "Clubs"
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated club information without players",
+            "schema": {
+              "$ref": "#/definitions/Club"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a specific club",
+        "description": "This is a private API call and you must be authenticated with Bearer {{token}}.\nDue to json-server limitations, this Endpoint always return status 200 with the path club id that is used.",
+        "parameters": [{
+          "name": "club",
+          "in": "path",
+          "description": "The club id",
+          "type": "string"
+        }],
+        "tags": [
+          "Clubs"
+        ],
+        "responses": {
+          "200": {
+            "description": "The club id that has been deleted",
+            "schema": {
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "id": "5c0ae896-6935-45c2-8430-077a0872f79d"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Club": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier representing a specific Club."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the Club."
+        },
+        "foundationDate": {
+          "type": "Date",
+          "description": "The day the club was founded."
+        },
+        "avatar": {
+          "type": "string",
+          "description": "Representative image URL of the Club."
+        },
+        "favorite": {
+          "type": "boolean",
+          "description": "Determines if the Club has been added to favorites."
+        }
+      },
+      "example": {
+        "id": "17628ecd-2320-4e32-95eb-03310f2858ee",
+        "name": "Derby County",
+        "foundationDate": "1982-04-24T11:10:47.376Z",
+        "avatar": "https://placeimg.com/297/316",
+        "favorite": true
+      }
+    },
+    "ClubDTO": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier representing a specific Club."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the Club."
+        },
+        "foundationDate": {
+          "type": "Date",
+          "description": "The day the club was founded."
+        },
+        "avatar": {
+          "type": "string",
+          "description": "Representative image URL of the Club."
+        },
+        "favorite": {
+          "type": "boolean",
+          "description": "Determines if the Club has been added to favorites."
+        },
+        "players": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Player"
+          }
+        }
+      },
+      "example": {
+        "id": "a477b119-004e-4a13-9cbb-ce7c7f79ad29",
+        "name": "Levante",
+        "foundationDate": "1985-03-15T22:50:54.556Z",
+        "avatar": "https://placeimg.com/312/293",
+        "favorite": true,
+        "players": [{
+          "id": "770d3824-4af8-45de-8da1-e300ffbf2d4c",
+          "avatar": "https://i.pravatar.cc/100",
+          "firstName": "Marco",
+          "lastName": "Perrier",
+          "email": "marco_perrier@unaref.name",
+          "clubId": "a477b119-004e-4a13-9cbb-ce7c7f79ad29",
+          "stats": [{
+              "id": "c58ae24f-852f-4275-ae2e-02b5d3d30671",
+              "season": "last",
+              "kicksToGoal": 253,
+              "goals": 252,
+              "goalsPercentage": 99.60474308300395,
+              "goalPasses": 130,
+              "intercepts": 642,
+              "score": 8.84
+            },
+            {
+              "id": "de3cfb0d-12ee-44d8-af84-88ee8c6b5bb4",
+              "season": "current",
+              "kicksToGoal": 281,
+              "goals": 117,
+              "goalsPercentage": 41.637010676156585,
+              "goalPasses": 83,
+              "intercepts": 248,
+              "score": 3.74
+            }
+          ]
+        }]
+      }
+    },
+    "Player": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "clubId": {
+          "type": "string"
+        },
+        "stats": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Stats"
+          }
+        }
+      }
+    },
+    "Stats": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "season": {
+          "type": "string"
+        },
+        "kicksToGoal": {
+          "type": "number"
+        },
+        "goals": {
+          "type": "number"
+        },
+        "goalsPercentage": {
+          "type": "number"
+        },
+        "goalPasses": {
+          "type": "number"
+        },
+        "intercepts": {
+          "type": "number"
+        },
+        "score": {
+          "type": "number"
+        }
+      }
+    },
+    "Error": {
+      "properties": {
+        "status": {
+          "type": "number"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "status": 403,
+        "message": "Invalid Token"
+      }
+    }
+  },
+  "securityDefinitions": {
+    "bearerAuth": {
+      "name": "Authorization",
+      "in": "header",
+      "type": "apiKey",
+      "description": "JWT Authorization header"
+    }
+  },
+  "security": [{
+    "bearerAuth": []
+  }]
+}
