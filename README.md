@@ -55,6 +55,10 @@ yarn && yarn start
 
 ## Memoria
 
+Librerias:
+
+Husky: para ejectuar git hooks. Permite que el codigo que querramos subir al repositorio este libre de errores, impidiendo la subida/commit si los hubiese.
+
 Custom scripts:
 
 typecheck: para evaluar que el codigo typescript no tenga errores.
