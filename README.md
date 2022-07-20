@@ -58,7 +58,8 @@ yarn && yarn start
 Librerias:
 
 Husky: para ejectuar git hooks. Permite que el codigo que querramos subir al repositorio este libre de errores, impidiendo la subida/commit si los hubiese.
+Se utilizara solamente el typecheck del cliente para agilizar los commits, sabiendo que el servidor no sera modificado y cumple con los requerimientos.
 
 Custom scripts:
 
-typecheck: para evaluar que el codigo typescript no tenga errores.
+typecheck: para evaluar que el codigo typescript no tenga errores. Se puede ejecutar en todo el proyecto como solo en el cliente o servidor con algunas de sus variantes.
