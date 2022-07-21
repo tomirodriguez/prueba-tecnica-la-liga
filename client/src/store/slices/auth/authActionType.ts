@@ -1,3 +1,5 @@
+import { User } from '../../../model';
+
 export type LoginRequestActionType = {
   email: string;
   password: string;
@@ -5,4 +7,8 @@ export type LoginRequestActionType = {
 
 export type LoginFailActionType = {
   error: string;
+};
+
+export type LoginSuccessActionType = {
+  user: User;
 };

@@ -21,7 +21,7 @@ export const authenticate: AuthenticateType = async ({ email, password }) => {
       return { token: token };
     })
     .catch((error) => {
-      if (axios.isAxiosError(error)) {
+      if (axios.isAxiosError(error) && error.status === '400') {
         return { error: 'invalid_user' };
       }
 
@@ -30,3 +30,5 @@ export const authenticate: AuthenticateType = async ({ email, password }) => {
 
   return response;
 };
+
+export const logout = () => {};

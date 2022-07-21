@@ -1,10 +1,10 @@
 import { useAppDispatch } from '../../../store/hooks';
 import { useAuthSelector } from '../../../store/hooks/useAuthSelector';
-import { loginRequest } from '../../../store/slices/auth/authSlice';
+import { loginRequest } from '../../../store/slices/auth';
 import { LoginForm } from './components';
 
 export const Authentication = () => {
-  const { error, loading } = useAuthSelector();
+  const { error, loading, user } = useAuthSelector();
 
   const dispatch = useAppDispatch();
 
@@ -21,7 +21,7 @@ export const Authentication = () => {
   return (
     <LoginForm
       errorMessage={error}
-      disableForm={loading}
+      disableForm={loading || user !== null}
       onFormSubmit={onFormSubmit}
     />
   );
