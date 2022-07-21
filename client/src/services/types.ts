@@ -1,3 +1,5 @@
+import { Club } from '../model';
+
 export type AuthorizationResponse = {
   token: string;
 };
@@ -19,3 +21,5 @@ export type AuthenticateType = ({
   token?: string;
   error?: string;
 }>;
+
+export type GetClubsResponse = { results: Club[]; total: number };

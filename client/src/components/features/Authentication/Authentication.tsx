@@ -1,12 +1,13 @@
-import { useAppDispatch } from '../../../store/hooks';
-import { useAuthSelector } from '../../../store/hooks/useAuthSelector';
+import { useAppDispatch, useAuthSelector } from '../../../store/hooks';
 import { loginRequest } from '../../../store/slices/auth';
 import { LoginForm } from './components';
+import { Navigate } from 'react-router-dom';
 
 export const Authentication = () => {
   const { error, loading, user } = useAuthSelector();
-
   const dispatch = useAppDispatch();
+
+  if (user) return <Navigate to={'/clubs'} replace />;
 
   const onFormSubmit = ({
     email,

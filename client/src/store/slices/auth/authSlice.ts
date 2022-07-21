@@ -8,12 +8,14 @@ import {
 } from './authActionType';
 
 interface AuthState {
+  checkingSession: boolean;
   loading: boolean;
   user: User | null;
   error: string;
 }
 
 const initialState: AuthState = {
+  checkingSession: true,
   loading: false,
   user: null,
   error: '',
@@ -44,10 +46,57 @@ export const authSlice = createSlice({
         error: action.payload.error,
       };
     },
+
+    checkUserSession: (state) => {
+      return {
+        ...state,
+        checkingSession: true,
+      };
+    },
+
+    sessionExpired: (state) => {
+      return {
+        ...state,
+        checkingSession: false,
+        user: null,
+      };
+    },
+
+    sessionIsOpen: (state) => {
+      return {
+        ...state,
+        checkingSession: false,
+        user: {},
+      };
+    },
+
+    logout: (state) => {
+      return {
+        ...state,
+        loading: true,
+      };
+    },
+
+    logoutSucceeded: (state) => {
+      return {
+        ...state,
+        loading: false,
+        user: null,
+      };
+    },
   },
 });
 
-export const { loginRequest, loginSucceded, loginFailed } = authSlice.actions;
+export const {
+  loginRequest,
+  loginSucceded,
+  loginFailed,
+  checkUserSession,
+  sessionExpired,
+  sessionIsOpen,
+  logout,
+  logoutSucceeded,
+} = authSlice.actions;
 
 export const selectAuth = (state: RootState) => state.auth;
 

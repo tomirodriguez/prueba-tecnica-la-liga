@@ -80,7 +80,9 @@ lint: para correr eslint dentro del cliente
 pre-commit: corre tanto typechecks como lint
 
 
-
+Casos de redireccion:
+  Siempre al iniciar la aplicacion se checkea si hay una sesion abierta, independientemente de la url pedida.
+  Una vez checkeado, se procede a ir a la pantalla solicitada, en donde si se quiere ir al login y ya hay una sesion abierta, es redirigido a /clubs. Caso contrario, el componente <RequireAuth> se va a encargar de redireccionar cualquier url al /login
 
 GitHooks:
   antes de realizar un commit se ejecutan el script pre-commit
