@@ -9,9 +9,11 @@
     "typecheck:server": "cd server && tsc",
     "typecheck": "yarn typecheck:server && yarn typecheck:client",
     "lint": "eslint client --max-warnings=0",
+    "prettier:fix": "yarn prettier --write client/",
+    "prettier:check": "yarn prettier --check client/",
     "prepare": "husky install",
-    "pre-commit": "yarn lint && yarn typecheck:client",
-    "pre-push": " yarn pre-commit && cd client && yarn test"
+    "pre-commit": "yarn lint && yarn typecheck:client && yarn prettier:check",
+    "pre-push": " yarn pre-commit && yarn prettier:check && cd client  && yarn test"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.30.7",
