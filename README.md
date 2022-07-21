@@ -87,7 +87,8 @@ Casos de redireccion:
   Una vez checkeado, se procede a ir a la pantalla solicitada, en donde si se quiere ir al login y ya hay una sesion abierta, es redirigido a /clubs. Caso contrario, el componente <RequireAuth> se va a encargar de redireccionar cualquier url al /login
 
 GitHooks:
-  antes de realizar un commit se ejecutan el script pre-commit
+  antes de realizar un commit se ejecutan el script pre-commit -> checkea tsc y eslint
+  antes de realizar un push se ejecutan el script pre-push -> checkea tsc, eslint y tests
 
 
 environment variables:
