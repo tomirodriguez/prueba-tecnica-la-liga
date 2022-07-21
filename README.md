@@ -68,6 +68,8 @@ Saga: Para aplicar middlewares se utilizara redux-saga
 
 Axios: Para la llamada a la api
 
+React-router-dom: Para manejar las rutas de la SPA
+
 
 Custom scripts:
 
