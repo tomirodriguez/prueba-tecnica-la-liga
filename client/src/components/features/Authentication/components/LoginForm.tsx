@@ -48,7 +48,6 @@ export const LoginForm: FC<Props> = ({
       <Flex
         direction={'column'}
         w={300}
-        h={300}
         shadow={'md'}
         rounded={'md'}
         background={'white'}

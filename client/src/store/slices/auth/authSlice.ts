@@ -70,7 +70,7 @@ export const authSlice = createSlice({
       };
     },
 
-    logout: (state) => {
+    logoutRequest: (state) => {
       return {
         ...state,
         loading: true,
@@ -94,7 +94,7 @@ export const {
   checkUserSession,
   sessionExpired,
   sessionIsOpen,
-  logout,
+  logoutRequest,
   logoutSucceeded,
 } = authSlice.actions;
 

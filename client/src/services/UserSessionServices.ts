@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { AuthenticateType, AuthorizationResponse } from './types';
-import { cleanToken } from './TokenHandler';
+import { cleanToken, storeToken } from './TokenHandler';
 
 export const authenticate: AuthenticateType = async ({ email, password }) => {
   const { REACT_APP_API_URL } = process.env;
@@ -18,7 +18,7 @@ export const authenticate: AuthenticateType = async ({ email, password }) => {
     )
     .then((response) => {
       const { token } = response.data;
-
+      storeToken(token);
       return { token: token };
     })
     .catch((error) => {
