@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useAuthSelector } from '../../store/hooks';
+import { useAuthSelector } from '../../hooks';
 
 export const RequireAuth: FC<PropsWithChildren<{}>> = ({ children }) => {
   const { user } = useAuthSelector();

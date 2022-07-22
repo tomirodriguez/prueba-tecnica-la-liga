@@ -1,8 +1,7 @@
 import { Box, Button } from '@chakra-ui/react';
 import { FC, useEffect } from 'react';
 import { LoginPage } from './pages/LoginPage';
-import { useAuthSelector } from './store/hooks';
-import { useAppDispatch } from './store/hooks/useAppDispatch';
+import { useAuthSelector, useAppDispatch } from './hooks';
 import { checkUserSession, logoutRequest } from './store/slices/auth';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { RequireAuth } from './components/features/RequiteAuth';

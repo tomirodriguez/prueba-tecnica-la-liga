@@ -1,4 +1,4 @@
-import { useAppDispatch, useAuthSelector } from '../../../store/hooks';
+import { useAppDispatch, useAuthSelector } from '../../../hooks';
 import { loginRequest } from '../../../store/slices/auth';
 import { LoginForm } from './components';
 import { Navigate } from 'react-router-dom';
