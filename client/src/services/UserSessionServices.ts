@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { AuthenticateType, AuthorizationResponse } from './types';
 import { cleanToken, storeToken } from './TokenHandler';
+import { simulateDelay } from './utils';
 
 export const authenticate: AuthenticateType = async ({ email, password }) => {
+  await simulateDelay();
   const { REACT_APP_API_URL } = process.env;
   const response = await axios
     .post<AuthorizationResponse>(
