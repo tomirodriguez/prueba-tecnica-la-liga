@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { getClubs, updateClubFavorite } from '../../services';
 import { sessionExpired } from '../slices/auth';
 import {
@@ -7,6 +7,8 @@ import {
   ClubsRequestActionType,
   clubsRequestFailed,
   clubsRequestSucceeded,
+  ClubsState,
+  selectClubsCatalog,
   updateClubFromCatalog,
 } from '../slices/clubsCatalog';
 import {
@@ -18,7 +20,15 @@ import { ToggleFavoriteActionType } from '../slices/favoriteToggler/favoriteTogg
 import { isSessionExpiredError } from './utils/isSessionExpiredError';
 
 function* fetchClubs(action: PayloadAction<ClubsRequestActionType>) {
-  const { clubs, total, error } = yield call(getClubs, action.payload);
+  const { nameFilter, filterFavorite }: ClubsState = yield select(
+    selectClubsCatalog
+  );
+
+  const { clubs, total, error } = yield call(getClubs, {
+    ...action.payload,
+    nameFilter,
+    filterFavorite,
+  });
 
   if (!error)
     yield put({

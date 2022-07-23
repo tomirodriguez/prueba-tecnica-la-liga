@@ -2,7 +2,10 @@ import { SearchIcon } from '@chakra-ui/icons';
 import { Input, InputGroup, InputLeftAddon } from '@chakra-ui/react';
 import { FC, SyntheticEvent, useRef } from 'react';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { clubsRequest } from '../../store/slices/clubsCatalog';
+import {
+  clubsRequest,
+  updateNameFilter,
+} from '../../store/slices/clubsCatalog';
 
 export const SearchBox: FC = () => {
   const dispatch = useAppDispatch();
@@ -15,7 +18,8 @@ export const SearchBox: FC = () => {
 
     const nameFilter = inputRef.current.value;
 
-    dispatch(clubsRequest({ nameFilter }));
+    dispatch(updateNameFilter({ nameFilter }));
+    dispatch(clubsRequest({ offset: 0 }));
   };
 
   return (

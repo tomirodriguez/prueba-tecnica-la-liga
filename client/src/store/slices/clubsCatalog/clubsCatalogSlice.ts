@@ -3,17 +3,21 @@ import {
   ClubsRequestActionType,
   ClubsRequestFailedActionType,
   ClubsRequestSucceededActionType,
+  FilterFavoriteUpdateActionType,
+  NameFilterUpdateActionType,
   UpdateClubActionType,
 } from '.';
 import type { RootState } from '../..';
 import { Club } from '../../../model';
 
-interface ClubsState {
+export interface ClubsState {
   loading: boolean;
   clubs: Club[];
   total: number;
   offset: number;
   error: string;
+  nameFilter?: string;
+  filterFavorite?: boolean;
 }
 
 const initialState: ClubsState = {
@@ -29,7 +33,11 @@ export const clubsSlice = createSlice({
   initialState,
   reducers: {
     clubsRequest: (state, action: PayloadAction<ClubsRequestActionType>) => {
-      return { ...state, loading: true, error: '' };
+      return {
+        ...state,
+        loading: true,
+        error: '',
+      };
     },
 
     clubsRequestSucceeded: (
@@ -43,6 +51,26 @@ export const clubsSlice = createSlice({
         clubs,
         total,
         offset,
+      };
+    },
+
+    updateNameFilter: (
+      state,
+      action: PayloadAction<NameFilterUpdateActionType>
+    ) => {
+      return {
+        ...state,
+        nameFilter: action.payload.nameFilter,
+      };
+    },
+
+    updateFavoriteFilter: (
+      state,
+      action: PayloadAction<FilterFavoriteUpdateActionType>
+    ) => {
+      return {
+        ...state,
+        filterFavorite: action.payload.filterFavorite,
       };
     },
 
@@ -78,8 +106,10 @@ export const {
   clubsRequestSucceeded,
   clubsRequestFailed,
   updateClubFromCatalog,
+  updateNameFilter,
+  updateFavoriteFilter,
 } = clubsSlice.actions;
 
-export const selectClubs = (state: RootState) => state.auth;
+export const selectClubsCatalog = (state: RootState) => state.clubs;
 
 export const clubsReducer = clubsSlice.reducer;

@@ -10,7 +10,7 @@ export const ClubsPage: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(clubsRequest({ limit: 6, nameFilter: '', offset: 0 }));
+    dispatch(clubsRequest({ offset: 0 }));
   }, [dispatch]);
 
   return (

@@ -1,16 +1,21 @@
 import { Club } from '../../../model';
 
 export type ClubsRequestActionType = {
-  offset?: number;
-  limit?: number;
-  nameFilter?: string;
-  filterFavorite?: boolean;
+  offset: number;
 };
 
 export type ClubsRequestSucceededActionType = {
   clubs: Club[];
   total: number;
   offset: number;
+};
+
+export type NameFilterUpdateActionType = {
+  nameFilter?: string;
+};
+
+export type FilterFavoriteUpdateActionType = {
+  filterFavorite?: boolean;
 };
 
 export type ClubsRequestFailedActionType = {

@@ -9,6 +9,10 @@ export const Pagination: FC = () => {
   const { total, offset } = useClubsCatalogSelector();
   const dispatch = useAppDispatch();
 
+  console.log({ total, offset });
+
+  if (total === 0) return null;
+
   const handleNextPage = () => {
     dispatch(clubsRequest({ offset: offset + PAGINATION_LIMIT }));
   };
@@ -17,7 +21,7 @@ export const Pagination: FC = () => {
     dispatch(clubsRequest({ offset: offset - PAGINATION_LIMIT }));
   };
 
-  const hasPreviousPage = offset - PAGINATION_LIMIT > 0;
+  const hasPreviousPage = offset - PAGINATION_LIMIT >= 0;
 
   const hasNextPage = offset + PAGINATION_LIMIT < total;
 
