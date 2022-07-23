@@ -110,8 +110,18 @@ token:
   La solucion que optaria en un ambiente productivo real, seria guardar un refresh token en una cookie http only y el token en memoria, pero para ello deberia haber una implementacion del lado del servidor que haga match con los endpoints que provee la api.
 
 
+ClubsCatalogSlice:
+  Solamente decidi que se va a mandar el offset al realizar una busqueda. Al tener un limite de 6 por el requerimiento, lo deje fijo sin posibilidad de ser modificado, pero su futura implementacion a un valor customizable no llevaria esfuerzo extra.
+
+  En el catalogo, decidi guardar el offset ya que se necesita saber que pagina del catalogo estoy viendo. Esta pagina solamente cambia cuando efectivamente la busqueda se realizo correctamente y podria pasar de a una o mas pagians si asi se quisiera.
+
+  Caso distinto fueron las busquedas por nombre o favoritos, ya que las tome como un filtro mas que una opcion de busqueda, por lo que el catalogo sabe que filtros tiene aplicados, sean nombre, favoritos, o ambos, y estos pueden ser actualizados mediante sus acciones, para luego efectivamente realizar la busqueda.
+
+  Esta division se realizo fundamentalmente para solucionar el problema de la paginacion, ya que el paginador no deberia por que saber que filtros tiene aplicado el catalogo, sino a que pagina del mismo ir.
+
 
 DONT FORGET!!!
   Poner de nuevo strict mode.
   Sacar el boton de autologin
   Remover/opcional delays en requests para ver pantallas de loading
+
