@@ -28,7 +28,7 @@ export const Authentication = () => {
     <>
       <LoginForm
         errorMessage={error}
-        disableForm={loading || user !== null}
+        isLoading={loading}
         onFormSubmit={onFormSubmit}
       />
       {process.env.NODE_ENV === 'development' && (

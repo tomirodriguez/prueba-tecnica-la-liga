@@ -5,13 +5,15 @@ import { NavBar } from '../components/features';
 
 export const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
   return (
-    <VStack h={'100vh'} bg={'bg'} position="relative">
+    <VStack minH={'100vh'} bg={'bg'} position="relative">
       <Box as="header" w="full">
         <NavBar />
       </Box>
 
       <ResponsiveContainer as="main" flexGrow={1}>
-        <Box w="full">{children}</Box>
+        <Box w="full" mt="12">
+          {children}
+        </Box>
       </ResponsiveContainer>
 
       <Box as="footer">Footer</Box>

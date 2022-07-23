@@ -7,6 +7,7 @@ import { LoginPage } from './pages/LoginPage';
 import { useAuthSelector } from './hooks/useAuthSelector';
 import { useAppDispatch } from './hooks/useAppDispatch';
 import { checkUserSession } from './store/slices/auth';
+import { LoadingScreen } from './components/ui/LoadingScreen';
 
 export const App: FC = () => {
   const { checkingSession } = useAuthSelector();
@@ -16,7 +17,7 @@ export const App: FC = () => {
     dispatch(checkUserSession());
   }, [dispatch]);
 
-  if (checkingSession) return <div>LOADING SCREEN</div>;
+  if (checkingSession) return <LoadingScreen />;
 
   return (
     <Box>

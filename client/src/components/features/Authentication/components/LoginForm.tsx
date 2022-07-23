@@ -11,7 +11,7 @@ import { ChangeEvent, FC, SyntheticEvent, useState } from 'react';
 
 type Props = {
   errorMessage: string;
-  disableForm: boolean;
+  isLoading: boolean;
 
   onFormSubmit: ({
     email,
@@ -25,7 +25,7 @@ type Props = {
 export const LoginForm: FC<Props> = ({
   onFormSubmit,
   errorMessage,
-  disableForm,
+  isLoading,
 }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -80,7 +80,7 @@ export const LoginForm: FC<Props> = ({
           )}
         </FormControl>
 
-        <Button mt={5} type="submit" disabled={disableForm}>
+        <Button mt={5} type="submit" isLoading={isLoading}>
           Entrar
         </Button>
       </Flex>
