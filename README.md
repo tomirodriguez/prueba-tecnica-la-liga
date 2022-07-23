@@ -83,7 +83,7 @@ typecheck: para evaluar que el codigo typescript no tenga errores. Se puede ejec
 
 lint: para correr eslint dentro del cliente
 
-pre-commit -> checkea tsc, prettier y eslint
+pre-commit -> checkea prettier y eslint
 
 pre-push -> checkea tsc, prettier, eslint y tests
 
