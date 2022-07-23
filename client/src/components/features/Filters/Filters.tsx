@@ -38,7 +38,7 @@ export const Filters: FC = () => {
           <Radio value={noFilter.id} onChange={removeFilter}>
             Todos
           </Radio>
-          <Radio value={filterFavorite.id} onChange={filterByFavorites}>
+          <Radio value={favoriteFilter.id} onChange={filterByFavorites}>
             Favoritos
           </Radio>
           <Radio value={noFavoriteFilter.id} onChange={filterWithoutFavorites}>
