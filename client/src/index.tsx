@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   // <React.StrictMode>
-  <ChakraProvider theme={lightTheme}>
+  <ChakraProvider theme={lightTheme} resetCSS>
     <Provider store={store}>
       <BrowserRouter>
         <App />

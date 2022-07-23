@@ -1,7 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { getClubs } from '../../services/ClubsServices';
-import { authenticate, logout } from '../../services/UserSessionServices';
+import { authenticate, getClubs, logout } from '../../services';
 import {
   checkUserSession,
   loginFailed,
@@ -13,7 +12,6 @@ import {
   sessionExpired,
   sessionIsOpen,
 } from '../slices/auth';
-import { clubsRequestSucceeded } from '../slices/clubs';
 
 function* loginUser(action: PayloadAction<LoginRequestActionType>) {
   const { token, error } = yield call(authenticate, action.payload);
@@ -23,12 +21,10 @@ function* loginUser(action: PayloadAction<LoginRequestActionType>) {
 }
 
 function* checkUser() {
-  const { clubs, total } = yield call(getClubs, {});
+  const { error } = yield call(getClubs, {});
 
-  if (clubs) {
-    yield put({ type: sessionIsOpen });
-    yield put({ type: clubsRequestSucceeded, payload: { clubs, total } });
-  } else yield put({ type: sessionExpired });
+  if (!error) yield put({ type: sessionIsOpen });
+  else yield put({ type: sessionExpired });
 }
 
 function* endSession() {

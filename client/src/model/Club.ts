@@ -6,5 +6,8 @@ export type Club = {
   foundationDate: Date;
   avatar: string;
   favorite: boolean;
+};
+
+export type ClubDetail = Club & {
   players: Player[];
 };

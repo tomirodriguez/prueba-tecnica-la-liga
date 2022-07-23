@@ -60,13 +60,15 @@ Librerias:
 Husky: para ejectuar git hooks. Permite que el codigo que querramos subir al repositorio este libre de errores, impidiendo la subida/commit si los hubiese.
 Se utilizara solamente el typecheck del cliente para agilizar los commits, sabiendo que el servidor no sera modificado y cumple con los requerimientos.
 
-Eslint: se instalaron las dependencias necesarias y se realizo la configuracion correspondiente para trabajar con prettier.
+Prettier: para validar la escritura de codigo.
+
+Eslint: se instalaron las dependencias necesarias y se realizo la configuracion correspondiente para trabajar con prettier, para detectar errores dentro del codigo.
 
 Redux: Para el manejo de estados se utiliza redux y react-redux
 
 Saga: Para aplicar middlewares se utilizara redux-saga
 
-Axios: Para la llamada a la api
+Axios: Para la llamada a la api. Tiene buena integracion con typescript y, a mi criteriom, una sintaxis mas limpia que el fetch nativo.
 
 React-router-dom: Para manejar las rutas de la SPA
 
@@ -79,7 +81,9 @@ typecheck: para evaluar que el codigo typescript no tenga errores. Se puede ejec
 
 lint: para correr eslint dentro del cliente
 
-pre-commit: corre tanto typechecks como lint
+pre-commit -> checkea tsc, prettier y eslint
+
+pre-push -> checkea tsc, prettier, eslint y tests
 
 
 Casos de redireccion:
@@ -87,8 +91,8 @@ Casos de redireccion:
   Una vez checkeado, se procede a ir a la pantalla solicitada, en donde si se quiere ir al login y ya hay una sesion abierta, es redirigido a /clubs. Caso contrario, el componente <RequireAuth> se va a encargar de redireccionar cualquier url al /login
 
 GitHooks:
-  antes de realizar un commit se ejecutan el script pre-commit -> checkea tsc y eslint
-  antes de realizar un push se ejecutan el script pre-push -> checkea tsc, eslint y tests
+  antes de realizar un commit se ejecutan el script pre-commit 
+  antes de realizar un push se ejecutan el script pre-push 
 
 
 environment variables:
@@ -112,6 +116,7 @@ token:
 
 
 
-REMOVER:
+DONT FORGET!!!
   Poner de nuevo strict mode.
   Sacar el boton de autologin
+  Remover/opcional delays en requests para ver pantallas de loading

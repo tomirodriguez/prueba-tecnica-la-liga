@@ -11,9 +11,7 @@ export const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
       </Box>
 
       <ResponsiveContainer as="main" flexGrow={1}>
-        <Box w="full" bg="red">
-          {children}
-        </Box>
+        <Box w="full">{children}</Box>
       </ResponsiveContainer>
 
       <Box as="footer">Footer</Box>
