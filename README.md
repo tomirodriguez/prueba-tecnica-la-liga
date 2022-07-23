@@ -74,6 +74,8 @@ React-router-dom: Para manejar las rutas de la SPA
 
 Jest para manejar los tests suites
 
+Chakra-icons:
+
 
 Custom scripts:
 
