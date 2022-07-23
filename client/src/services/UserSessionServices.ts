@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { AuthenticateType, AuthorizationResponse } from './types';
-import { cleanToken, storeToken } from './TokenHandler';
-import { simulateDelay } from './utils';
+import { cleanToken, storeToken, simulateDelay } from './utils';
+import { INVALID_USER_ERROR } from './constants';
 
 export const authenticate: AuthenticateType = async ({ email, password }) => {
   await simulateDelay();
@@ -24,8 +24,8 @@ export const authenticate: AuthenticateType = async ({ email, password }) => {
       return { token: token };
     })
     .catch((error) => {
-      if (axios.isAxiosError(error) && error.status === '400') {
-        return { error: 'invalid_user' };
+      if (axios.isAxiosError(error) && error.status === '401') {
+        return { error: INVALID_USER_ERROR };
       }
 
       return { error: 'unknown_error' };

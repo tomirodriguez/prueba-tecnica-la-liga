@@ -1,3 +1,4 @@
 export * from './Authentication';
-export * from './RequiteAuth';
 export * from './NavBar';
+export * from './SearchBox';
+export * from './ClubList';

@@ -15,3 +15,21 @@ export type ClubsRequestSucceededActionType = {
 export type ClubsRequestFailedActionType = {
   error: string;
 };
+
+export type ToggleFavoriteActionType = {
+  clubId: string;
+  favorite: boolean;
+};
+
+export type ToggleFavoriteSuccessActionType = {
+  clubId: string;
+  favorite: boolean;
+};
+
+export type ToggleFavoriteFailedActionType = {
+  error: string;
+};
+
+export type UpdateClubActionType = {
+  club: Club;
+};

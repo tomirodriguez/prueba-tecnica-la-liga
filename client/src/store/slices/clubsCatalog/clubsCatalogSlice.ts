@@ -1,8 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ClubsRequestActionType, ClubsRequestSucceededActionType } from '.';
+import {
+  ClubsRequestActionType,
+  ClubsRequestFailedActionType,
+  ClubsRequestSucceededActionType,
+  UpdateClubActionType,
+} from '.';
 import type { RootState } from '../..';
 import { Club } from '../../../model';
-import { ClubsRequestFailedActionType } from './clubsActionType';
 
 interface ClubsState {
   loading: boolean;
@@ -48,11 +52,29 @@ export const clubsSlice = createSlice({
         error: action.payload.error,
       };
     },
+
+    updateClubFromCatalog: (
+      state,
+      action: PayloadAction<UpdateClubActionType>
+    ) => {
+      const newClub = action.payload.club;
+
+      return {
+        ...state,
+        clubs: state.clubs.map((club) =>
+          club.id === newClub.id ? newClub : { ...club }
+        ),
+      };
+    },
   },
 });
 
-export const { clubsRequest, clubsRequestSucceeded, clubsRequestFailed } =
-  clubsSlice.actions;
+export const {
+  clubsRequest,
+  clubsRequestSucceeded,
+  clubsRequestFailed,
+  updateClubFromCatalog,
+} = clubsSlice.actions;
 
 export const selectClubs = (state: RootState) => state.auth;
 

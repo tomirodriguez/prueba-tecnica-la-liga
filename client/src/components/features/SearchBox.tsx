@@ -1,19 +1,21 @@
-import { InputGroup, InputLeftAddon, Input } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
+import { Input, InputGroup, InputLeftAddon } from '@chakra-ui/react';
 import { FC, SyntheticEvent, useRef } from 'react';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { clubsRequest } from '../../store/slices/clubsCatalog';
 
-type Props = {
-  onSearch: (searchValue: string) => void;
-};
-
-export const SearchBox: FC<Props> = ({ onSearch }) => {
+export const SearchBox: FC = () => {
+  const dispatch = useAppDispatch();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleFormSubmit = (event: SyntheticEvent) => {
+    event.preventDefault();
+
     if (!inputRef.current) return;
 
-    event.preventDefault();
-    onSearch(inputRef.current?.value);
+    const nameFilter = inputRef.current.value;
+
+    dispatch(clubsRequest({ nameFilter }));
   };
 
   return (

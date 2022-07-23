@@ -30,3 +30,10 @@ export type GetClubsProps = {
   nameFilter?: string;
   filterFavorite?: boolean;
 };
+
+export type UpdateClubFavoriteProps = {
+  clubId: string;
+  favorite: boolean;
+};
+
+export type UpdateClubFavoriteResponse = Partial<Club>;

@@ -8,15 +8,26 @@ import {
   Switch,
   Text,
 } from '@chakra-ui/react';
-import { FC } from 'react';
-import { Club } from '../../../../model';
+import { FC, ChangeEvent } from 'react';
+import { Club } from '../../model';
 
 type Props = {
   club: Club;
+  isTogglingFavorite: boolean;
+
+  onFavoriteToggle: (clubId: string, favorite: boolean) => void;
 };
 
-export const ClubCard: FC<Props> = ({ club }) => {
+export const ClubCard: FC<Props> = ({
+  club,
+  isTogglingFavorite,
+  onFavoriteToggle,
+}) => {
   const { avatar, foundationDate, name } = club;
+
+  const handleSwitchChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onFavoriteToggle(club.id, event.target.checked);
+  };
 
   return (
     <Box
@@ -31,13 +42,13 @@ export const ClubCard: FC<Props> = ({ club }) => {
       <Flex gap={3}>
         <Image
           rounded={'md'}
-          boxSize="28"
+          boxSize={{ base: '28', xl: '36' }}
           src={avatar}
           alt={name}
           flexShrink={0}
         />
         <Flex flexDir={'column'} flexGrow={1}>
-          <Text fontSize={'lg'} as={'h2'}>
+          <Text fontSize={'lg'} as={'h2'} fontWeight="bold">
             {club.name}
           </Text>
           <Text fontSize="sm">
@@ -54,9 +65,12 @@ export const ClubCard: FC<Props> = ({ club }) => {
               Favorito
             </FormLabel>
             <Switch
+              onChange={handleSwitchChange}
               id={`favorite-${club.id}`}
               size="md"
               colorScheme={'blue'}
+              isChecked={club.favorite}
+              isDisabled={isTogglingFavorite}
               _focus={{ outline: 'none', border: 'none', boxShadow: 'none' }}
               _active={{ outline: 'none', border: 'none', boxShadow: 'none' }}
             />

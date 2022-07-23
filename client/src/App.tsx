@@ -1,13 +1,11 @@
 import { Box } from '@chakra-ui/react';
 import { FC, useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { RequireAuth } from './components/features/RequiteAuth';
-import { ClubsPage } from './pages/ClubsPage';
-import { LoginPage } from './pages/LoginPage';
-import { useAuthSelector } from './hooks/useAuthSelector';
-import { useAppDispatch } from './hooks/useAppDispatch';
+import { RequireAuth } from './components/hoc';
+import { LoadingScreen } from './components/ui';
+import { useAppDispatch, useAuthSelector } from './hooks';
+import { ClubsPage, LoginPage } from './pages';
 import { checkUserSession } from './store/slices/auth';
-import { LoadingScreen } from './components/ui/LoadingScreen';
 
 export const App: FC = () => {
   const { checkingSession } = useAuthSelector();

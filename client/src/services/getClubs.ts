@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { UNAUTHORIZED_USER_ERROR } from './constants';
-import { cleanToken, getToken } from './TokenHandler';
 import { GetClubsProps, GetClubsResponse } from './types';
-import { simulateDelay } from './utils';
+import { cleanToken, getToken, simulateDelay } from './utils';
 
 export const getClubs = async ({
   limit = 6,
@@ -38,7 +37,7 @@ export const getClubs = async ({
       return { clubs: results, total };
     })
     .catch((error) => {
-      if (axios.isAxiosError(error) && error.status === '400') {
+      if (axios.isAxiosError(error) && error.status === '401') {
         cleanToken();
         return { error: UNAUTHORIZED_USER_ERROR };
       }

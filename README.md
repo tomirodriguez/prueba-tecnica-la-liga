@@ -101,13 +101,6 @@ environment variables:
 
 template en .env.template
 
-
-ACLARACIONES API:
-  El error que devuelve una credencial fallida tiene un status de 400 (Bad request), mientras que en la documentacion el mismo es de 401 (Unauthorized).
-
-![Alt text](assets/README_login_error.png "Server login error")
-
-
 token:
   Cualquier solucion que pueda utilizar desde front, va a tener pros y contras.
   Tanto si la guardo en localstorage como en una cookie, hay bulnerabilidad y riesgo de tener una perdida de informacion frente a ataques. Se pueden recibir ataques XSS en el primer caso, o CSRF en el segundo.
