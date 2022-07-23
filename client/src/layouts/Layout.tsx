@@ -2,6 +2,7 @@ import { Box, VStack } from '@chakra-ui/react';
 import { FC, PropsWithChildren } from 'react';
 import { ResponsiveContainer } from '.';
 import { NavBar } from '../components/features';
+import { Footer } from '../components/ui';
 
 export const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
   return (
@@ -16,7 +17,7 @@ export const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
         </Box>
       </ResponsiveContainer>
 
-      <Box as="footer">Footer</Box>
+      <Footer />
     </VStack>
   );
 };
