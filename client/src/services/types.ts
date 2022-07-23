@@ -28,4 +28,5 @@ export type GetClubsProps = {
   limit?: number;
   offset?: number;
   nameFilter?: string;
+  filterFavorite?: boolean;
 };

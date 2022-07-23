@@ -12,8 +12,6 @@ import {
 function* fetchClubs(action: PayloadAction<ClubsRequestActionType>) {
   const { clubs, total, error } = yield call(getClubs, action.payload);
 
-  console.log();
-
   if (!error)
     yield put({ type: clubsRequestSucceeded, payload: { clubs, total } });
   else if (error === UNAUTHORIZED_USER_ERROR)

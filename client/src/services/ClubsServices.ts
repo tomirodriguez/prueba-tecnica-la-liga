@@ -8,6 +8,7 @@ export const getClubs = async ({
   limit = 6,
   offset = 0,
   nameFilter = '',
+  filterFavorite,
 }: GetClubsProps) => {
   const { REACT_APP_API_URL } = process.env;
   const token = getToken();
@@ -22,6 +23,7 @@ export const getClubs = async ({
         limit,
         offset,
         name_like: nameFilter,
+        favorite: filterFavorite,
       },
       baseURL: REACT_APP_API_URL,
       headers: {
