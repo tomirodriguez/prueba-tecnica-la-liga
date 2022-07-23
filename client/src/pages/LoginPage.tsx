@@ -4,6 +4,7 @@ import { Authentication } from '../components/features/Authentication';
 export const LoginPage = () => {
   return (
     <Flex
+      as={'main'}
       w="full"
       h="100vh"
       bg="bg"

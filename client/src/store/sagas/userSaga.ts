@@ -13,6 +13,7 @@ import {
   sessionExpired,
   sessionIsOpen,
 } from '../slices/auth';
+import { clubsRequestSucceeded } from '../slices/clubs';
 
 function* loginUser(action: PayloadAction<LoginRequestActionType>) {
   const { token, error } = yield call(authenticate, action.payload);
@@ -22,10 +23,12 @@ function* loginUser(action: PayloadAction<LoginRequestActionType>) {
 }
 
 function* checkUser() {
-  const { error } = yield call(getClubs);
+  const { clubs, total } = yield call(getClubs, {});
 
-  if (error) yield put({ type: sessionExpired });
-  else yield put({ type: sessionIsOpen });
+  if (clubs) {
+    yield put({ type: sessionIsOpen });
+    yield put({ type: clubsRequestSucceeded, payload: { clubs, total } });
+  } else yield put({ type: sessionExpired });
 }
 
 function* endSession() {

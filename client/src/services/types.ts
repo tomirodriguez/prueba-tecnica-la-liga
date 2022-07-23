@@ -23,3 +23,9 @@ export type AuthenticateType = ({
 }>;
 
 export type GetClubsResponse = { results: Club[]; total: number };
+
+export type GetClubsProps = {
+  limit?: number;
+  offset?: number;
+  nameFilter?: string;
+};

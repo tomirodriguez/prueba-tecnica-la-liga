@@ -110,3 +110,8 @@ token:
 
   La solucion que optaria en un ambiente productivo real, seria guardar un refresh token en una cookie http only y el token en memoria, pero para ello deberia haber una implementacion del lado del servidor que haga match con los endpoints que provee la api.
 
+
+
+REMOVER:
+  Poner de nuevo strict mode.
+  Sacar el boton de autologin

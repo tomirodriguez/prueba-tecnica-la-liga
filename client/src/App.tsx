@@ -1,10 +1,11 @@
-import { Box, Button } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { FC, useEffect } from 'react';
-import { LoginPage } from './pages/LoginPage';
-import { useAuthSelector, useAppDispatch } from './hooks';
-import { checkUserSession, logoutRequest } from './store/slices/auth';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { RequireAuth } from './components/features/RequiteAuth';
+import { useAppDispatch, useAuthSelector } from './hooks';
+import { ClubsPage } from './pages/ClubsPage';
+import { LoginPage } from './pages/LoginPage';
+import { checkUserSession } from './store/slices/auth';
 
 export const App: FC = () => {
   const { checkingSession } = useAuthSelector();
@@ -25,16 +26,7 @@ export const App: FC = () => {
           element={
             <RequireAuth>
               <Routes>
-                <Route
-                  path="clubs"
-                  element={
-                    <Box w={'full'} h={'100vh'} bg={'violet'}>
-                      <Button onClick={() => dispatch(logoutRequest())}>
-                        Logout
-                      </Button>
-                    </Box>
-                  }
-                />
+                <Route path="clubs" element={<ClubsPage />} />
                 <Route path="/" element={<Navigate to={'/clubs'} />} />
               </Routes>
             </RequireAuth>

@@ -1,8 +1,12 @@
 import axios from 'axios';
 import { cleanToken, getToken } from './TokenHandler';
-import { GetClubsResponse } from './types';
+import { GetClubsProps, GetClubsResponse } from './types';
 
-export const getClubs = async () => {
+export const getClubs = async ({
+  limit = 6,
+  offset = 0,
+  nameFilter = '',
+}: GetClubsProps) => {
   const { REACT_APP_API_URL } = process.env;
   const token = getToken();
 
@@ -10,6 +14,11 @@ export const getClubs = async () => {
 
   const response = await axios
     .get<GetClubsResponse>('api/clubs', {
+      params: {
+        limit,
+        offset: 0,
+        name_like: nameFilter,
+      },
       baseURL: REACT_APP_API_URL,
       headers: {
         'Content-Type': 'application/json',
