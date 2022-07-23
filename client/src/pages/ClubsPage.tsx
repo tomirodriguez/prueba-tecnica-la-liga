@@ -1,6 +1,6 @@
 import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
 import { FC, useEffect } from 'react';
-import { ClubList, SearchBox } from '../components/features';
+import { ClubList, Filters, SearchBox } from '../components/features';
 import { Pagination } from '../components/features/Pagination';
 import { useAppDispatch } from '../hooks';
 import { Layout } from '../layouts';
@@ -10,7 +10,7 @@ export const ClubsPage: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(clubsRequest({ offset: 0 }));
+    dispatch(clubsRequest());
   }, [dispatch]);
 
   return (
@@ -20,8 +20,11 @@ export const ClubsPage: FC = () => {
           templateColumns={{ base: 'repeat(1,1fr)', xl: 'repeat(3,1fr)' }}
           gap="8"
         >
-          <GridItem>
+          <GridItem display={'flex'} flexDir="column">
             <SearchBox />
+            <Box mt={4}>
+              <Filters />
+            </Box>
           </GridItem>
           <GridItem colSpan={{ base: 1, xl: 2 }}>
             <ClubList

@@ -33,7 +33,7 @@ function* fetchClubs(action: PayloadAction<ClubsRequestActionType>) {
   if (!error)
     yield put({
       type: clubsRequestSucceeded,
-      payload: { clubs, total, offset: action.payload.offset },
+      payload: { clubs, total, offset: action.payload?.offset || 0 },
     });
   else if (isSessionExpiredError(error)) yield put({ type: sessionExpired });
   else yield put({ type: clubsRequestFailed, payload: { error } });

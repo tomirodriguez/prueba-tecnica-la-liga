@@ -1,8 +1,11 @@
 import { Club } from '../../../model';
 
-export type ClubsRequestActionType = {
-  offset: number;
-};
+export type ClubsRequestActionType =
+  | {
+      offset?: number;
+      limit?: number;
+    }
+  | undefined;
 
 export type ClubsRequestSucceededActionType = {
   clubs: Club[];

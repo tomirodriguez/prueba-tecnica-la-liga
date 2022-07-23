@@ -111,7 +111,6 @@ token:
 
 
 ClubsCatalogSlice:
-  Solamente decidi que se va a mandar el offset al realizar una busqueda. Al tener un limite de 6 por el requerimiento, lo deje fijo sin posibilidad de ser modificado, pero su futura implementacion a un valor customizable no llevaria esfuerzo extra.
 
   En el catalogo, decidi guardar el offset ya que se necesita saber que pagina del catalogo estoy viendo. Esta pagina solamente cambia cuando efectivamente la busqueda se realizo correctamente y podria pasar de a una o mas pagians si asi se quisiera.
 

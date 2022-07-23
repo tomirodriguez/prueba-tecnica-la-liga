@@ -19,7 +19,7 @@ export const SearchBox: FC = () => {
     const nameFilter = inputRef.current.value;
 
     dispatch(updateNameFilter({ nameFilter }));
-    dispatch(clubsRequest({ offset: 0 }));
+    dispatch(clubsRequest());
   };
 
   return (
