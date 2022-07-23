@@ -6,10 +6,8 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { clubsRequest } from '../../store/slices/clubsCatalog';
 
 export const Pagination: FC = () => {
-  const { total, offset } = useClubsCatalogSelector();
+  const { total, offset, loading } = useClubsCatalogSelector();
   const dispatch = useAppDispatch();
-
-  console.log({ total, offset });
 
   if (total === 0) return null;
 
@@ -27,14 +25,22 @@ export const Pagination: FC = () => {
 
   return (
     <Flex align={'center'}>
-      <Button onClick={handlePreviousPage} isDisabled={!hasPreviousPage}>
+      <Button
+        onClick={handlePreviousPage}
+        isDisabled={!hasPreviousPage}
+        isLoading={loading}
+      >
         Anterior
       </Button>
       <Text mx="4">
         {Math.floor(offset / PAGINATION_LIMIT) + 1}/
         {Math.ceil(total / PAGINATION_LIMIT)}
       </Text>
-      <Button onClick={handleNextPage} isDisabled={!hasNextPage}>
+      <Button
+        onClick={handleNextPage}
+        isDisabled={!hasNextPage}
+        isLoading={loading}
+      >
         Siguiente
       </Button>
     </Flex>
