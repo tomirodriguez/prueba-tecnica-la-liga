@@ -76,7 +76,7 @@ Jest para manejar los tests suites
 
 axios-mock-adapter: Para poder realizar tests con mayor facilidad mockeando las respuestas
 
-Chakra-icons:
+Chakra-icons: pack de iconos de la libreria de chakra
 
 
 Custom scripts:
