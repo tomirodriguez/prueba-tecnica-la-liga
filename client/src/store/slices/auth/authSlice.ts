@@ -26,7 +26,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     loginRequest: (state, action: PayloadAction<LoginRequestActionType>) => {
-      return { ...state, loading: true };
+      return { ...state, loading: true, error: '' };
     },
 
     loginSucceded: (state, action: PayloadAction<LoginSuccessActionType>) => {
@@ -34,7 +34,6 @@ export const authSlice = createSlice({
         ...state,
         loading: false,
         user: action.payload.user,
-        error: '',
       };
     },
 
