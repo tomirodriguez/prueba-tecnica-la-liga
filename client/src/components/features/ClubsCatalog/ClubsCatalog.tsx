@@ -14,8 +14,6 @@ export const ClubsCatalog: FC = () => {
     dispatch(clubsRequest({ limit: 6, nameFilter: '', offset: 0 }));
   }, [dispatch]);
 
-  if (loading) return <div>LOADING SCREEN</div>;
-
   const handleSearchRequest = (searchValue: string) => {
     dispatch(clubsRequest({ nameFilter: searchValue }));
   };
@@ -29,9 +27,10 @@ export const ClubsCatalog: FC = () => {
         <GridItem>
           <SearchBox onSearch={handleSearchRequest} />
         </GridItem>
-        <GridItem colSpan={2}>
+        <GridItem colSpan={{ base: 1, xl: 2 }}>
           <ClubList
             clubs={clubs}
+            loading={loading}
             templateColumns={{ base: 'repeat(1,1fr)', md: 'repeat(2,1fr)' }}
           />
         </GridItem>

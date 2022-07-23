@@ -18,7 +18,7 @@ export const SearchBox: FC<Props> = ({ onSearch }) => {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <InputGroup>
+      <InputGroup bg={'white'} rounded="md">
         <InputLeftAddon children={<SearchIcon />} />
         <Input type="text" placeholder="Qué club desea buscar" ref={inputRef} />
       </InputGroup>
