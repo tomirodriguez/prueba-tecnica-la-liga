@@ -21,7 +21,10 @@ function* fetchClubs(action: PayloadAction<ClubsRequestActionType>) {
   const { clubs, total, error } = yield call(getClubs, action.payload);
 
   if (!error)
-    yield put({ type: clubsRequestSucceeded, payload: { clubs, total } });
+    yield put({
+      type: clubsRequestSucceeded,
+      payload: { clubs, total, offset: action.payload.offset },
+    });
   else if (isSessionExpiredError(error)) yield put({ type: sessionExpired });
   else yield put({ type: clubsRequestFailed, payload: { error } });
 }

@@ -2,9 +2,10 @@ import axios from 'axios';
 import { UNAUTHORIZED_USER_ERROR } from './constants';
 import { GetClubsProps, GetClubsResponse } from './types';
 import { cleanToken, getToken, simulateDelay } from './utils';
+import { PAGINATION_LIMIT } from '../constants';
 
 export const getClubs = async ({
-  limit = 6,
+  limit = PAGINATION_LIMIT,
   offset = 0,
   nameFilter = '',
   filterFavorite,

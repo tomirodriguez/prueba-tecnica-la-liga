@@ -1,5 +1,5 @@
 import { useAppSelector } from './useAppSelector';
 
-export const useClubsSelector = () => {
+export const useClubsCatalogSelector = () => {
   return useAppSelector((state) => state.clubs);
 };

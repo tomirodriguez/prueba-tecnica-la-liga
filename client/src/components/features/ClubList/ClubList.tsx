@@ -1,6 +1,6 @@
 import { Grid, GridItem, ResponsiveValue } from '@chakra-ui/react';
 import { FC } from 'react';
-import { useClubsSelector } from '../../../hooks';
+import { useClubsCatalogSelector } from '../../../hooks';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { useFavoriteTogglerSelector } from '../../../hooks/useFavoriteTogglerSelector';
 import { toggleClubFavorite } from '../../../store/slices/favoriteToggler';
@@ -13,7 +13,7 @@ type Props = {
 
 export const ClubList: FC<Props> = ({ templateColumns }) => {
   const dispatch = useAppDispatch();
-  const { loading, clubs } = useClubsSelector();
+  const { loading, clubs } = useClubsCatalogSelector();
   const { loading: togglingFavorite, clubUpdatedId } =
     useFavoriteTogglerSelector();
 

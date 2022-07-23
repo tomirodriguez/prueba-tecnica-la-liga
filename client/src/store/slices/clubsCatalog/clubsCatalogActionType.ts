@@ -10,6 +10,7 @@ export type ClubsRequestActionType = {
 export type ClubsRequestSucceededActionType = {
   clubs: Club[];
   total: number;
+  offset: number;
 };
 
 export type ClubsRequestFailedActionType = {

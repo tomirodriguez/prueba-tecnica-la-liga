@@ -12,12 +12,14 @@ interface ClubsState {
   loading: boolean;
   clubs: Club[];
   total: number;
+  offset: number;
   error: string;
 }
 
 const initialState: ClubsState = {
   loading: false,
   total: 0,
+  offset: 0,
   clubs: [],
   error: '',
 };
@@ -34,11 +36,13 @@ export const clubsSlice = createSlice({
       state,
       action: PayloadAction<ClubsRequestSucceededActionType>
     ) => {
+      const { clubs, total, offset } = action.payload;
       return {
         ...state,
         loading: false,
-        clubs: action.payload.clubs,
-        total: action.payload.total,
+        clubs,
+        total,
+        offset,
       };
     },
 

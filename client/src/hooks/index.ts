@@ -1,5 +1,5 @@
 export * from './useAppDispatch';
 export * from './useAppSelector';
-export * from './useClubsSelector';
+export * from './useClubsCatalogSelector';
 export * from './useAuthSelector';
 export * from './useFavoriteTogglerSelector';

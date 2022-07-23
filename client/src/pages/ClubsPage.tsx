@@ -1,6 +1,7 @@
-import { Box, Grid, GridItem } from '@chakra-ui/react';
+import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
 import { FC, useEffect } from 'react';
 import { ClubList, SearchBox } from '../components/features';
+import { Pagination } from '../components/features/Pagination';
 import { useAppDispatch } from '../hooks';
 import { Layout } from '../layouts';
 import { clubsRequest } from '../store/slices/clubsCatalog';
@@ -28,6 +29,9 @@ export const ClubsPage: FC = () => {
             />
           </GridItem>
         </Grid>
+        <Flex mt="8" justify={{ base: 'center', xl: 'end' }}>
+          <Pagination />
+        </Flex>
       </Box>
     </Layout>
   );
