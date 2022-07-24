@@ -5,9 +5,10 @@ import {
   LoginRequestActionType,
   LoginFailActionType,
   LoginSuccessActionType,
+  SessionIsOpenActionType,
 } from './authActionType';
 
-interface AuthState {
+export interface AuthState {
   checkingSession: boolean;
   loading: boolean;
   user: User | null;
@@ -61,11 +62,11 @@ export const authSlice = createSlice({
       };
     },
 
-    sessionIsOpen: (state) => {
+    sessionIsOpen: (state, action: PayloadAction<SessionIsOpenActionType>) => {
       return {
         ...state,
         checkingSession: false,
-        user: {},
+        user: action.payload.user,
       };
     },
 

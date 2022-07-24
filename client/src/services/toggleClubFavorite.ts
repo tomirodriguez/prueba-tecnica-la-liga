@@ -15,8 +15,6 @@ export const updateClubFavorite = async ({
   const { REACT_APP_API_URL } = process.env;
   const token = getToken();
 
-  if (!token) return { error: UNAUTHORIZED_USER_ERROR };
-
   await simulateDelay();
 
   const response = await axios
@@ -41,17 +39,19 @@ export const updateClubFavorite = async ({
       else throw new Error(CLUB_NOT_FOUND_ERROR);
     })
     .catch((error) => {
+      const { status } = error.response;
+
       if (error.message === CLUB_NOT_FOUND_ERROR)
         return { error: CLUB_NOT_FOUND_ERROR };
 
-      if (error.status === '401') {
-        cleanToken();
-        return { error: UNAUTHORIZED_USER_ERROR };
-      }
-
-      if (error.status === '403') {
+      if (status === 403) {
         cleanToken();
         return { error: INVALID_TOKEN_ERROR };
+      }
+
+      if (status === 401) {
+        cleanToken();
+        return { error: UNAUTHORIZED_USER_ERROR };
       }
 
       return { error: 'unknown_error' };

@@ -23,14 +23,13 @@ export function* loginUser(action: PayloadAction<LoginRequestActionType>) {
 export function* checkUser() {
   const { error } = yield call(getClubs, {});
 
-  if (!error) yield put(sessionIsOpen);
-  else yield put(sessionExpired);
+  if (!error) yield put(sessionIsOpen({ user: {} }));
+  else yield put(sessionExpired());
 }
 
 export function* endSession() {
-  console.log('LLEGA ACA ?');
   yield call(logout);
-  yield put(logoutSucceeded);
+  yield put(logoutSucceeded());
 }
 
 function* userSaga() {

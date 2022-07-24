@@ -1,8 +1,8 @@
 import axios from 'axios';
+import { PAGINATION_LIMIT } from '../constants';
 import { UNAUTHORIZED_USER_ERROR } from './constants';
 import { GetClubsProps, GetClubsResponse } from './types';
-import { cleanToken, getToken, simulateDelay } from './utils';
-import { PAGINATION_LIMIT } from '../constants';
+import { getToken, simulateDelay } from './utils';
 
 export const getClubs = async ({
   limit = PAGINATION_LIMIT,
@@ -12,8 +12,6 @@ export const getClubs = async ({
 }: GetClubsProps) => {
   const { REACT_APP_API_URL } = process.env;
   const token = getToken();
-
-  if (!token) return { error: UNAUTHORIZED_USER_ERROR };
 
   await simulateDelay();
 
@@ -38,8 +36,9 @@ export const getClubs = async ({
       return { clubs: results, total };
     })
     .catch((error) => {
-      if (axios.isAxiosError(error) && error.status === '401') {
-        cleanToken();
+      const { status } = error.response;
+
+      if (status === 400 || status === 401) {
         return { error: UNAUTHORIZED_USER_ERROR };
       }
 

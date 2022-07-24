@@ -12,3 +12,7 @@ export type LoginFailActionType = {
 export type LoginSuccessActionType = {
   user: User;
 };
+
+export type SessionIsOpenActionType = {
+  user: User;
+};
