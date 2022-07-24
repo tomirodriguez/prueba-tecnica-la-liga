@@ -4,8 +4,8 @@ import { render } from '@testing-library/react';
 import { FC, PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 
-import type { AppStore, RootState } from '../../redux';
-import { setupStore } from '../../redux';
+import type { AppStore, RootState } from '../redux';
+import { setupStore } from '../redux';
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.

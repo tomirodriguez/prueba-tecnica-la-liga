@@ -5,7 +5,7 @@ import {
   AXIOS_GET_CLUBS_DEFAULT_FAVORITE_RESPONSE,
   AXIOS_GET_CLUBS_DEFAULT_RESPONSE,
   renderWithProviders,
-} from '../../../../testing/utils';
+} from '../../../../testing';
 
 import { ClubCatalog } from '../ClubCatalog';
 

@@ -1,8 +1,8 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { INVALID_USER_ERROR } from '../../../../services/constants';
-import { axiosMock } from '../../../../testing/utils';
-import { renderWithProviders } from '../../../../testing/utils/redux-utils';
+import { axiosMock } from '../../../../testing';
+import { renderWithProviders } from '../../../../testing/redux-utils';
 import { Authentication } from '../Authentication';
 
 describe('<Authentication>', () => {
