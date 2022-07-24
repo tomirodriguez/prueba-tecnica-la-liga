@@ -1,8 +1,9 @@
-import { Button, ButtonGroup, Flex, Heading, Spacer } from '@chakra-ui/react';
+import { ButtonGroup, Flex, Heading, Spacer } from '@chakra-ui/react';
 import { FC } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { ResponsiveContainer } from '../../layouts';
 import { logoutRequest } from '../../redux/slices/auth';
+import { PrimaryButton } from '../ui/PrimaryButton';
 
 export const NavBar: FC = () => {
   const dispatch = useAppDispatch();
@@ -16,7 +17,7 @@ export const NavBar: FC = () => {
       w={'full'}
       position={'sticky'}
       top={0}
-      bg="primary.dark"
+      bg="primary.main"
       color="white"
       shadow={'2xl'}
       align="center"
@@ -27,9 +28,7 @@ export const NavBar: FC = () => {
           <Heading size="md">LaLiga App</Heading>
           <Spacer />
           <ButtonGroup gap="2">
-            <Button bg="secondary.dark" onClick={handleLogout}>
-              Logout
-            </Button>
+            <PrimaryButton onClick={handleLogout}>Logout</PrimaryButton>
           </ButtonGroup>
         </Flex>
       </ResponsiveContainer>
