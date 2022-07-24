@@ -31,22 +31,25 @@ function* fetchClubs(action: PayloadAction<ClubsRequestActionType>) {
   });
 
   if (!error)
-    yield put({
-      type: clubsRequestSucceeded,
-      payload: { clubs, total, offset: action.payload?.offset || 0 },
-    });
-  else if (isSessionExpiredError(error)) yield put({ type: sessionExpired });
-  else yield put({ type: clubsRequestFailed, payload: { error } });
+    yield put(
+      clubsRequestSucceeded({
+        clubs,
+        total,
+        offset: action.payload?.offset || 0,
+      })
+    );
+  else if (isSessionExpiredError(error)) yield put(sessionExpired());
+  else yield put(clubsRequestFailed({ error }));
 }
 
 function* toggleFavorite(action: PayloadAction<ToggleFavoriteActionType>) {
   const { club, error } = yield call(updateClubFavorite, action.payload);
 
   if (club) {
-    yield put({ type: toggleClubFavoriteRequestSuccess });
-    yield put({ type: updateClubFromCatalog, payload: { club } });
-  } else if (isSessionExpiredError(error)) yield put({ type: sessionExpired });
-  else yield put({ type: toggleClubFavoriteRequestFailed, payload: { error } });
+    yield put(toggleClubFavoriteRequestSuccess());
+    yield put(updateClubFromCatalog({ club }));
+  } else if (isSessionExpiredError(error)) yield put(sessionExpired());
+  else yield put(toggleClubFavoriteRequestFailed({ error }));
 }
 
 function* clubsSaga() {
