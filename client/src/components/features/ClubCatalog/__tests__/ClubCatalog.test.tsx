@@ -1,18 +1,11 @@
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-  within,
-} from '@testing-library/react';
+import { fireEvent, screen, waitFor, within } from '@testing-library/react';
 
-import { Provider } from 'react-redux';
 import {
   axiosMock,
   AXIOS_GET_CLUBS_DEFAULT_FAVORITE_RESPONSE,
   AXIOS_GET_CLUBS_DEFAULT_RESPONSE,
+  renderWithProviders,
 } from '../../../../testing/utils';
-import { renderWithProviders } from '../../../../testing/utils';
 
 import { ClubCatalog } from '../ClubCatalog';
 

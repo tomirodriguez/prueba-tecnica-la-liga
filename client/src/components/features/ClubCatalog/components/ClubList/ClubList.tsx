@@ -4,8 +4,8 @@ import { useClubsCatalogSelector } from '../../../../../hooks';
 import { useAppDispatch } from '../../../../../hooks/useAppDispatch';
 import { useFavoriteTogglerSelector } from '../../../../../hooks/useFavoriteTogglerSelector';
 import { toggleClubFavoriteRequest } from '../../../../../redux/slices/favoriteToggler';
-import { ClubCard, SkeletonClubCard } from '../../../../ui';
-import { createRandomArrayOfN } from './utils';
+import { ClubCard } from '../../../../ui';
+import { SkeletonClubList } from '../../../../ui/SkeletonClubList';
 
 type Props = {
   templateColumns?: ResponsiveValue<0 | (string & {})>;
@@ -17,16 +17,7 @@ export const ClubList: FC<Props> = ({ templateColumns }) => {
   const { loading: togglingFavorite, clubUpdatedId } =
     useFavoriteTogglerSelector();
 
-  if (loading)
-    return (
-      <Grid templateColumns={templateColumns} gap="5">
-        {createRandomArrayOfN(6).map((value) => (
-          <GridItem key={`skeleton-club-card-${value}`}>
-            <SkeletonClubCard />
-          </GridItem>
-        ))}
-      </Grid>
-    );
+  if (loading) return <SkeletonClubList />;
 
   const handleFavoriteToggle = (clubId: string, favorite: boolean) => {
     dispatch(toggleClubFavoriteRequest({ clubId, favorite }));
