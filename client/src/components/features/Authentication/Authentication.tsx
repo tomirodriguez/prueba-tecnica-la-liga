@@ -1,14 +1,13 @@
+import { Button } from '@chakra-ui/react';
 import { useAppDispatch, useAuthSelector } from '../../../hooks';
 import { loginRequest } from '../../../redux/slices/auth';
 import { LoginForm } from './components';
-import { Navigate } from 'react-router-dom';
-import { Button } from '@chakra-ui/react';
 
 export const Authentication = () => {
   const { error, loading, user } = useAuthSelector();
   const dispatch = useAppDispatch();
 
-  if (user) return <Navigate to={'/clubs'} replace />;
+  if (user) return null;
 
   const onFormSubmit = ({
     email,

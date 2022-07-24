@@ -2,10 +2,10 @@ import {
   Button,
   Flex,
   FormControl,
+  FormErrorMessage,
   FormHelperText,
   FormLabel,
   Input,
-  Text,
 } from '@chakra-ui/react';
 import { ChangeEvent, FC, SyntheticEvent, useState } from 'react';
 
@@ -43,6 +43,8 @@ export const LoginForm: FC<Props> = ({
     setPassword(event.target.value);
   };
 
+  const hasError = !!errorMessage;
+
   return (
     <form onSubmit={handleFormSubmit}>
       <Flex
@@ -60,19 +62,21 @@ export const LoginForm: FC<Props> = ({
           <Input type="email" id="email" onChange={handleEmailChange} />
         </FormControl>
 
-        <FormControl>
+        <FormControl isInvalid={hasError}>
           <FormLabel htmlFor="password" mt={5}>
             Password
           </FormLabel>
           <Input
+            aria-errormessage="error-message"
             type="password"
             id="password"
             onChange={handlePasswordChange}
           />
-          {errorMessage ? (
-            <Text align={'right'} fontSize={'xs'} color={'red'}>
+          {hasError ? (
+            // Chakra no esta manejando la accesibilidad con mensajes de error. Con esto se soluciona
+            <FormErrorMessage id="error-message">
               Usuario invalido.
-            </Text>
+            </FormErrorMessage>
           ) : (
             <FormHelperText textAlign={'right'} fontSize={'xs'}>
               Nunca compartas tus contraseñas
