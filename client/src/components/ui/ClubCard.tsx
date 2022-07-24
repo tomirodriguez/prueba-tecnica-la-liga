@@ -32,13 +32,21 @@ export const ClubCard: FC<Props> = ({
 
   return (
     <ScaleFade initialScale={1} in whileHover={{ scale: 1.05 }}>
-      <Box rounded="md" bg="white" p="4" cursor={'pointer'} shadow={'md'}>
+      <Box
+        as="article"
+        title={club.name}
+        rounded="md"
+        bg="white"
+        p="4"
+        cursor={'pointer'}
+        shadow={'md'}
+      >
         <Flex gap={3}>
           <Image
             rounded={'md'}
             boxSize={{ base: '28', xl: '36' }}
             src={avatar}
-            alt={name}
+            alt={`Escudo de ${name}`}
             flexShrink={0}
           />
           <Flex flexDir={'column'} flexGrow={1}>

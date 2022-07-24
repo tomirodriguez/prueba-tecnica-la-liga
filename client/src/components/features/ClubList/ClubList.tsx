@@ -1,4 +1,4 @@
-import { Grid, GridItem, ResponsiveValue } from '@chakra-ui/react';
+import { Box, Grid, GridItem, ResponsiveValue, Text } from '@chakra-ui/react';
 import { FC } from 'react';
 import { useClubsCatalogSelector } from '../../../hooks';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
@@ -32,10 +32,20 @@ export const ClubList: FC<Props> = ({ templateColumns }) => {
     dispatch(toggleClubFavoriteRequest({ clubId, favorite }));
   };
 
+  if (clubs.length === 0)
+    return (
+      <Box mx="auto" maxW={300} my={8}>
+        <Text fontSize={'lg'} textAlign="center">
+          No se encontraron resultados para la busqueda que desea realizar.
+          Intente de nuevo.
+        </Text>
+      </Box>
+    );
+
   return (
-    <Grid templateColumns={templateColumns} gap="5">
+    <Grid templateColumns={templateColumns} gap="5" as={'ol'}>
       {clubs.map((club) => (
-        <GridItem key={club.id}>
+        <GridItem key={club.id} as={'li'} listStyleType="none">
           <ClubCard
             club={club}
             onFavoriteToggle={handleFavoriteToggle}
