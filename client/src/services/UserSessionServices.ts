@@ -4,8 +4,10 @@ import { cleanToken, storeToken, simulateDelay } from './utils';
 import { INVALID_USER_ERROR } from './constants';
 
 export const authenticate: AuthenticateType = async ({ email, password }) => {
-  await simulateDelay();
-  const { REACT_APP_API_URL } = process.env;
+  const { REACT_APP_API_URL, REACT_APP_MOCK_DELAY } = process.env;
+
+  if (REACT_APP_MOCK_DELAY === 'true') await simulateDelay();
+
   const response = await axios
     .post<AuthorizationResponse>(
       'login',

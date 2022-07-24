@@ -12,10 +12,10 @@ export const updateClubFavorite = async ({
   clubId,
   favorite,
 }: UpdateClubFavoriteProps) => {
-  const { REACT_APP_API_URL } = process.env;
   const token = getToken();
+  const { REACT_APP_API_URL, REACT_APP_MOCK_DELAY } = process.env;
 
-  await simulateDelay();
+  if (REACT_APP_MOCK_DELAY === 'true') await simulateDelay();
 
   const response = await axios
     .patch<UpdateClubFavoriteResponse>(

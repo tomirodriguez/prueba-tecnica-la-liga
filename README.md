@@ -129,4 +129,4 @@ DONT FORGET!!!
   Remover/opcional delays en requests para ver pantallas de loading
   Handle errores en una funcion externa y yields de session expired
   Explicar por que uni tests de redux y sagas
-  Agregar explicacion de env.test
+  Agregar explicacion de env.template
