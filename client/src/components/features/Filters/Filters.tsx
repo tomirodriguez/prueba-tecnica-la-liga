@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import {
   clubsRequest,
   updateFavoriteFilter,
-} from '../../../store/slices/clubsCatalog';
+} from '../../../redux/slices/clubsCatalog';
 import { PrimaryButton } from '../../ui/PrimaryButton';
 import {
   favoriteFilter,

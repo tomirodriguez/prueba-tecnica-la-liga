@@ -5,7 +5,7 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import {
   clubsRequest,
   updateNameFilter,
-} from '../../store/slices/clubsCatalog';
+} from '../../redux/slices/clubsCatalog';
 
 export const SearchBox: FC = () => {
   const dispatch = useAppDispatch();

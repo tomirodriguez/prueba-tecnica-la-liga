@@ -5,7 +5,7 @@ import { RequireAuth } from './components/hoc';
 import { LoadingScreen } from './components/ui';
 import { useAppDispatch, useAuthSelector } from './hooks';
 import { ClubsPage, LoginPage } from './pages';
-import { checkUserSession } from './store/slices/auth';
+import { checkUserSession } from './redux/slices/auth';
 
 export const App: FC = () => {
   const { checkingSession } = useAuthSelector();

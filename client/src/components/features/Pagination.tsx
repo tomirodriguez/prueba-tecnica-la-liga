@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { PAGINATION_LIMIT } from '../../constants';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useClubsCatalogSelector } from '../../hooks/useClubsCatalogSelector';
-import { clubsRequest } from '../../store/slices/clubsCatalog';
+import { clubsRequest } from '../../redux/slices/clubsCatalog';
 import { PrimaryButton } from '../ui/PrimaryButton';
 
 export const Pagination: FC = () => {

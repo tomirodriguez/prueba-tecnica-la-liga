@@ -1,5 +1,5 @@
 import { useAppDispatch, useAuthSelector } from '../../../hooks';
-import { loginRequest } from '../../../store/slices/auth';
+import { loginRequest } from '../../../redux/slices/auth';
 import { LoginForm } from './components';
 import { Navigate } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';

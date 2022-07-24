@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { useClubsCatalogSelector } from '../../../hooks';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { useFavoriteTogglerSelector } from '../../../hooks/useFavoriteTogglerSelector';
-import { toggleClubFavorite } from '../../../store/slices/favoriteToggler';
+import { toggleClubFavorite } from '../../../redux/slices/favoriteToggler';
 import { ClubCard, SkeletonClubCard } from '../../ui';
 import { createRandomArrayOfN } from './utils';
 

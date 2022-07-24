@@ -4,7 +4,7 @@ import { ClubList, Filters, SearchBox } from '../components/features';
 import { Pagination } from '../components/features/Pagination';
 import { useAppDispatch } from '../hooks';
 import { Layout } from '../layouts';
-import { clubsRequest } from '../store/slices/clubsCatalog';
+import { clubsRequest } from '../redux/slices/clubsCatalog';
 
 export const ClubsPage: FC = () => {
   const dispatch = useAppDispatch();

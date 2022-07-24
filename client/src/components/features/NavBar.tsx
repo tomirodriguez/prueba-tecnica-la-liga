@@ -2,7 +2,7 @@ import { Button, ButtonGroup, Flex, Heading, Spacer } from '@chakra-ui/react';
 import { FC } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { ResponsiveContainer } from '../../layouts';
-import { logoutRequest } from '../../store/slices/auth';
+import { logoutRequest } from '../../redux/slices/auth';
 
 export const NavBar: FC = () => {
   const dispatch = useAppDispatch();
