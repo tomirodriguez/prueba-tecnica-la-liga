@@ -21,7 +21,7 @@ import {
 
 const axiosMock = new MockAdapter(axios);
 
-describe('<authStore and authSaga>', () => {
+describe('<authSlice and authSaga>', () => {
   afterEach(() => {
     axiosMock.reset();
   });

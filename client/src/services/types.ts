@@ -22,7 +22,11 @@ export type AuthenticateType = ({
   error?: string;
 }>;
 
-export type GetClubsResponse = { results: Club[]; total: number };
+export type ApiClub = Omit<Club, 'foundationDate'> & {
+  foundationDate: string;
+};
+
+export type GetClubsResponse = { results: ApiClub[]; total: number };
 
 export type GetClubsProps = {
   limit?: number;
@@ -36,4 +40,4 @@ export type UpdateClubFavoriteProps = {
   favorite: boolean;
 };
 
-export type UpdateClubFavoriteResponse = Partial<Club>;
+export type UpdateClubFavoriteResponse = Partial<ApiClub>;

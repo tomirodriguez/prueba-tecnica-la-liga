@@ -10,7 +10,7 @@ import {
 import type { RootState } from '../..';
 import { Club } from '../../../model';
 
-export interface ClubsState {
+export interface ClubsCatalogState {
   loading: boolean;
   clubs: Club[];
   total: number;
@@ -20,7 +20,7 @@ export interface ClubsState {
   filterFavorite?: boolean;
 }
 
-const initialState: ClubsState = {
+const initialState: ClubsCatalogState = {
   loading: false,
   total: 0,
   offset: 0,
@@ -28,7 +28,7 @@ const initialState: ClubsState = {
   error: '',
 };
 
-export const clubsSlice = createSlice({
+export const clubsCatalogSlice = createSlice({
   name: 'clubs',
   initialState,
   reducers: {
@@ -108,8 +108,8 @@ export const {
   updateClubFromCatalog,
   updateNameFilter,
   updateFavoriteFilter,
-} = clubsSlice.actions;
+} = clubsCatalogSlice.actions;
 
 export const selectClubsCatalog = (state: RootState) => state.clubs;
 
-export const clubsReducer = clubsSlice.reducer;
+export const clubsCatalogReducer = clubsCatalogSlice.reducer;

@@ -47,7 +47,7 @@ export const ClubCard: FC<Props> = ({
             </Text>
             <Text fontSize="sm">
               Fundado el{' '}
-              {new Date(foundationDate).toLocaleString('es', {
+              {foundationDate.toLocaleString('es', {
                 year: 'numeric',
                 month: '2-digit',
                 day: 'numeric',

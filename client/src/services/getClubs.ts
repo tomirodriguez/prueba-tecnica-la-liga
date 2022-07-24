@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { PAGINATION_LIMIT } from '../constants';
-import { UNAUTHORIZED_USER_ERROR } from './constants';
+import { INVALID_TOKEN_ERROR } from './constants';
 import { GetClubsProps, GetClubsResponse } from './types';
 import { getToken, simulateDelay } from './utils';
 
@@ -33,13 +33,21 @@ export const getClubs = async ({
     .then((response) => {
       const { results, total } = response.data;
 
-      return { clubs: results, total };
+      const clubs = results.map((club) => ({
+        ...club,
+        foundationDate: new Date(club.foundationDate),
+      }));
+
+      return {
+        clubs,
+        total,
+      };
     })
     .catch((error) => {
       const { status } = error.response;
 
-      if (status === 400 || status === 401) {
-        return { error: UNAUTHORIZED_USER_ERROR };
+      if (status === 403) {
+        return { error: INVALID_TOKEN_ERROR };
       }
 
       return { error: 'unknown_error' };

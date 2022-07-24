@@ -3,7 +3,7 @@ import { ToggleFavoriteActionType } from '.';
 import type { RootState } from '../..';
 import { ToggleFavoriteFailedActionType } from './favoriteTogglerActionType';
 
-interface FavoriteTogglerState {
+export interface FavoriteTogglerState {
   loading: boolean;
   clubUpdatedId: string;
   error: string;
@@ -19,7 +19,7 @@ export const favoriteTogglerSlice = createSlice({
   name: 'favoriteToggler',
   initialState,
   reducers: {
-    toggleClubFavorite: (
+    toggleClubFavoriteRequest: (
       state,
       action: PayloadAction<ToggleFavoriteActionType>
     ) => {
@@ -53,7 +53,7 @@ export const favoriteTogglerSlice = createSlice({
 });
 
 export const {
-  toggleClubFavorite,
+  toggleClubFavoriteRequest,
   toggleClubFavoriteRequestSuccess,
   toggleClubFavoriteRequestFailed,
 } = favoriteTogglerSlice.actions;

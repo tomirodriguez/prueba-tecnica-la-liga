@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Club } from '../model';
 import {
   CLUB_NOT_FOUND_ERROR,
   INVALID_TOKEN_ERROR,
@@ -35,14 +34,20 @@ export const updateClubFavorite = async ({
     .then((response) => {
       const { id } = response.data;
 
-      if (id) return { club: response.data as Club };
+      if (id && response.data.foundationDate)
+        return {
+          club: {
+            ...response.data,
+            foundationDate: new Date(response.data.foundationDate),
+          },
+        };
       else throw new Error(CLUB_NOT_FOUND_ERROR);
     })
     .catch((error) => {
-      const { status } = error.response;
-
       if (error.message === CLUB_NOT_FOUND_ERROR)
         return { error: CLUB_NOT_FOUND_ERROR };
+
+      const { status } = error.response;
 
       if (status === 403) {
         cleanToken();

@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { useClubsCatalogSelector } from '../../../hooks';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { useFavoriteTogglerSelector } from '../../../hooks/useFavoriteTogglerSelector';
-import { toggleClubFavorite } from '../../../redux/slices/favoriteToggler';
+import { toggleClubFavoriteRequest } from '../../../redux/slices/favoriteToggler';
 import { ClubCard, SkeletonClubCard } from '../../ui';
 import { createRandomArrayOfN } from './utils';
 
@@ -29,7 +29,7 @@ export const ClubList: FC<Props> = ({ templateColumns }) => {
     );
 
   const handleFavoriteToggle = (clubId: string, favorite: boolean) => {
-    dispatch(toggleClubFavorite({ clubId, favorite }));
+    dispatch(toggleClubFavoriteRequest({ clubId, favorite }));
   };
 
   return (

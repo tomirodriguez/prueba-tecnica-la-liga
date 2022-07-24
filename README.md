@@ -130,3 +130,4 @@ DONT FORGET!!!
   Handle errores en una funcion externa y yields de session expired
   Explicar por que uni tests de redux y sagas
   Agregar explicacion de env.template
+  Agregar handleo de bad request en clubs si tengo tiempo

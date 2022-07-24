@@ -7,12 +7,12 @@ import {
   ClubsRequestActionType,
   clubsRequestFailed,
   clubsRequestSucceeded,
-  ClubsState,
+  ClubsCatalogState,
   selectClubsCatalog,
   updateClubFromCatalog,
 } from '../slices/clubsCatalog';
 import {
-  toggleClubFavorite,
+  toggleClubFavoriteRequest,
   toggleClubFavoriteRequestFailed,
   toggleClubFavoriteRequestSuccess,
 } from '../slices/favoriteToggler';
@@ -20,7 +20,7 @@ import { ToggleFavoriteActionType } from '../slices/favoriteToggler/favoriteTogg
 import { isSessionExpiredError } from './utils/isSessionExpiredError';
 
 function* fetchClubs(action: PayloadAction<ClubsRequestActionType>) {
-  const { nameFilter, filterFavorite }: ClubsState = yield select(
+  const { nameFilter, filterFavorite }: ClubsCatalogState = yield select(
     selectClubsCatalog
   );
 
@@ -38,23 +38,27 @@ function* fetchClubs(action: PayloadAction<ClubsRequestActionType>) {
         offset: action.payload?.offset || 0,
       })
     );
-  else if (isSessionExpiredError(error)) yield put(sessionExpired());
-  else yield put(clubsRequestFailed({ error }));
+  else {
+    if (isSessionExpiredError(error)) yield put(sessionExpired());
+    yield put(clubsRequestFailed({ error }));
+  }
 }
 
 function* toggleFavorite(action: PayloadAction<ToggleFavoriteActionType>) {
   const { club, error } = yield call(updateClubFavorite, action.payload);
 
   if (club) {
-    yield put(toggleClubFavoriteRequestSuccess());
     yield put(updateClubFromCatalog({ club }));
-  } else if (isSessionExpiredError(error)) yield put(sessionExpired());
-  else yield put(toggleClubFavoriteRequestFailed({ error }));
+    yield put(toggleClubFavoriteRequestSuccess());
+  } else {
+    if (isSessionExpiredError(error)) yield put(sessionExpired());
+    yield put(toggleClubFavoriteRequestFailed({ error }));
+  }
 }
 
 function* clubsSaga() {
   yield takeLatest(clubsRequest, fetchClubs);
-  yield takeLatest(toggleClubFavorite, toggleFavorite);
+  yield takeLatest(toggleClubFavoriteRequest, toggleFavorite);
 }
 
 export default clubsSaga;
