@@ -1,10 +1,11 @@
-import { Button, Flex, Radio, RadioGroup, Text } from '@chakra-ui/react';
+import { Flex, Radio, RadioGroup, Text } from '@chakra-ui/react';
 import { FC, useState } from 'react';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import {
   clubsRequest,
   updateFavoriteFilter,
 } from '../../../store/slices/clubsCatalog';
+import { PrimaryButton } from '../../ui/PrimaryButton';
 import {
   favoriteFilter,
   FavoriteFilterType,
@@ -46,9 +47,9 @@ export const Filters: FC = () => {
           </Radio>
         </Flex>
       </RadioGroup>
-      <Button w={'full'} mt={8} onClick={handleApplyFilters}>
+      <PrimaryButton w={'full'} mt={8} onClick={handleApplyFilters}>
         Aplicar
-      </Button>
+      </PrimaryButton>
     </Flex>
   );
 };

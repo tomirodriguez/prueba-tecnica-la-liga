@@ -128,4 +128,4 @@ DONT FORGET!!!
   Sacar el boton de autologin
   Remover/opcional delays en requests para ver pantallas de loading
   Handle errores en una funcion externa
-
+  Explicar por que uni tests de redux y sagas

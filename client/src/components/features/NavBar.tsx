@@ -16,7 +16,8 @@ export const NavBar: FC = () => {
       w={'full'}
       position={'sticky'}
       top={0}
-      bg="white"
+      bg="primary.dark"
+      color="white"
       shadow={'2xl'}
       align="center"
       py={2}
@@ -26,7 +27,9 @@ export const NavBar: FC = () => {
           <Heading size="md">LaLiga App</Heading>
           <Spacer />
           <ButtonGroup gap="2">
-            <Button onClick={handleLogout}>Logout</Button>
+            <Button bg="secondary.dark" onClick={handleLogout}>
+              Logout
+            </Button>
           </ButtonGroup>
         </Flex>
       </ResponsiveContainer>

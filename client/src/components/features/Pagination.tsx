@@ -1,9 +1,10 @@
-import { Button, Flex, Text } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 import { FC } from 'react';
 import { PAGINATION_LIMIT } from '../../constants';
-import { useClubsCatalogSelector } from '../../hooks/useClubsCatalogSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useClubsCatalogSelector } from '../../hooks/useClubsCatalogSelector';
 import { clubsRequest } from '../../store/slices/clubsCatalog';
+import { PrimaryButton } from '../ui/PrimaryButton';
 
 export const Pagination: FC = () => {
   const { total, offset, loading } = useClubsCatalogSelector();
@@ -25,24 +26,24 @@ export const Pagination: FC = () => {
 
   return (
     <Flex align={'center'}>
-      <Button
+      <PrimaryButton
         onClick={handlePreviousPage}
         isDisabled={!hasPreviousPage}
         isLoading={loading}
       >
         Anterior
-      </Button>
+      </PrimaryButton>
       <Text mx="4">
         {Math.floor(offset / PAGINATION_LIMIT) + 1}/
         {Math.ceil(total / PAGINATION_LIMIT)}
       </Text>
-      <Button
+      <PrimaryButton
         onClick={handleNextPage}
         isDisabled={!hasNextPage}
         isLoading={loading}
       >
         Siguiente
-      </Button>
+      </PrimaryButton>
     </Flex>
   );
 };
