@@ -10,6 +10,7 @@ import {
 } from '../redux/slices/clubsCatalog/clubsCatalogSlice';
 import { favoriteTogglerReducer } from '../redux/slices/favoriteToggler';
 import { favoriteTogglerSlice } from '../redux/slices/favoriteToggler/favoriteTogglerSlice';
+import { DUMMY_CLUBS_LIST } from './mocks';
 
 type Props = {
   sagas?: Saga;
@@ -23,6 +24,11 @@ export const TestingLayout: FC<PropsWithChildren<Props>> = ({
 }) => {
   const sagaMiddleware = createSagaMiddleware();
 
+  const clubsMockedInfo = {
+    clubs: DUMMY_CLUBS_LIST,
+    total: DUMMY_CLUBS_LIST.length,
+  };
+
   const store = configureStore({
     reducer: {
       auth: authReducer,
@@ -30,7 +36,11 @@ export const TestingLayout: FC<PropsWithChildren<Props>> = ({
       favoriteToggler: favoriteTogglerReducer,
     },
     preloadedState: {
-      clubs: { ...clubsCatalogSlice.getInitialState(), ...preloadClubsState },
+      clubs: {
+        ...clubsCatalogSlice.getInitialState(),
+        ...clubsMockedInfo,
+        ...preloadClubsState,
+      },
       auth: authSlice.getInitialState(),
       favoriteToggler: favoriteTogglerSlice.getInitialState(),
     },

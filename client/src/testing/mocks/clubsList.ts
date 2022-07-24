@@ -13,7 +13,7 @@ export const DUMMY_CLUBS_LIST: Club[] = [
     name: 'Getafe',
     foundationDate: new Date('1986-06-23T20:41:39.651Z'),
     avatar: 'https://placeimg.com/290/297',
-    favorite: false,
+    favorite: true,
   },
   {
     id: '58dbd00d-1046-4c19-a29a-092b6b1a7039',
@@ -34,7 +34,7 @@ export const DUMMY_CLUBS_LIST: Club[] = [
     name: 'West Ham United',
     foundationDate: new Date('2020-03-23T05:17:48.185Z'),
     avatar: 'https://placeimg.com/299/310',
-    favorite: false,
+    favorite: true,
   },
   {
     id: '0c42d8f7-21f5-4c9e-ae08-f31ce42f9900',

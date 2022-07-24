@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { TestingLayout } from '../../../../testing';
 
 import { DUMMY_CLUBS_LIST } from '../../../../testing/mocks/clubsList';
@@ -7,12 +7,7 @@ import { ClubList } from '../ClubList';
 describe('<ClubList>', () => {
   it('should render all the clubs in the store', async () => {
     render(
-      <TestingLayout
-        preloadClubsState={{
-          clubs: DUMMY_CLUBS_LIST,
-          total: DUMMY_CLUBS_LIST.length,
-        }}
-      >
+      <TestingLayout>
         <ClubList />
       </TestingLayout>
     );
@@ -28,9 +23,21 @@ describe('<ClubList>', () => {
         day: 'numeric',
       });
       const card = screen.getByRole('article', { name: club.name });
-      expect(card).toHaveTextContent(club.name);
-      expect(card).toHaveTextContent(foundationDateText);
-      expect(screen.getByAltText(`Escudo de ${club.name}`)).toBeInTheDocument();
+      expect(within(card).getByText(club.name)).toBeInTheDocument();
+      expect(
+        within(card).getByText(`Fundado el ${foundationDateText}`)
+      ).toBeInTheDocument();
+      expect(
+        within(card).getByAltText(`Escudo de ${club.name}`)
+      ).toBeInTheDocument();
+
+      const favoriteToggle: HTMLInputElement = within(card).getByRole(
+        'checkbox',
+        {
+          name: 'Favorito',
+        }
+      );
+      expect(favoriteToggle.checked).toBe(club.favorite);
     });
   });
 
