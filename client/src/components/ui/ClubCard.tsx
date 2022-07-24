@@ -31,7 +31,7 @@ export const ClubCard: FC<Props> = ({
   };
 
   return (
-    <ScaleFade initialScale={1} in whileHover={{ scale: 1.05, shadow: 'xl' }}>
+    <ScaleFade initialScale={1} in whileHover={{ scale: 1.05 }}>
       <Box rounded="md" bg="white" p="4" cursor={'pointer'} shadow={'md'}>
         <Flex gap={3}>
           <Image

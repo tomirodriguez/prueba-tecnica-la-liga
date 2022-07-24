@@ -8,7 +8,6 @@ export const SkeletonClubCard = () => (
     bg="white"
     p="4"
     cursor={'pointer'}
-    _hover={{ shadow: 'xl' }}
   >
     <Flex gap={3}>
       <Progress
