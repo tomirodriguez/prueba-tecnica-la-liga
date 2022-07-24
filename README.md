@@ -78,6 +78,8 @@ axios-mock-adapter: Para poder realizar tests con mayor facilidad mockeando las 
 
 Chakra-icons: pack de iconos de la libreria de chakra
 
+redux-saga-tester: to test sagas e2e
+
 
 Custom scripts:
 
@@ -125,4 +127,5 @@ DONT FORGET!!!
   Poner de nuevo strict mode.
   Sacar el boton de autologin
   Remover/opcional delays en requests para ver pantallas de loading
+  Handle errores en una funcion externa
 
