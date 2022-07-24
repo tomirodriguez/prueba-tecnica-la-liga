@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { App } from './App';
 import reportWebVitals from './reportWebVitals';
-import { store } from './redux';
+import { setupStore } from './redux';
 import { lightTheme } from './themes/lightTheme';
 
 const root = ReactDOM.createRoot(
@@ -15,7 +15,7 @@ const root = ReactDOM.createRoot(
 root.render(
   // <React.StrictMode>
   <ChakraProvider theme={lightTheme} resetCSS>
-    <Provider store={store}>
+    <Provider store={setupStore()}>
       <BrowserRouter>
         <App />
       </BrowserRouter>

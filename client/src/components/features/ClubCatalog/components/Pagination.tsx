@@ -1,10 +1,10 @@
 import { Flex, Text } from '@chakra-ui/react';
 import { FC } from 'react';
-import { PAGINATION_LIMIT } from '../../constants';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { useClubsCatalogSelector } from '../../hooks/useClubsCatalogSelector';
-import { clubsRequest } from '../../redux/slices/clubsCatalog';
-import { PrimaryButton } from '../ui/PrimaryButton';
+import { PAGINATION_LIMIT } from '../../../../constants';
+import { useAppDispatch } from '../../../../hooks/useAppDispatch';
+import { useClubsCatalogSelector } from '../../../../hooks/useClubsCatalogSelector';
+import { clubsRequest } from '../../../../redux/slices/clubsCatalog';
+import { PrimaryButton } from '../../../ui/PrimaryButton';
 
 export const Pagination: FC = () => {
   const { total, offset, loading } = useClubsCatalogSelector();
@@ -24,9 +24,12 @@ export const Pagination: FC = () => {
 
   const hasNextPage = offset + PAGINATION_LIMIT < total;
 
+  if (!hasNextPage && !hasPreviousPage) return null;
+
   return (
-    <Flex align={'center'}>
+    <Flex align={'center'} as="nav" aria-label="Pagination">
       <PrimaryButton
+        aria-label="Previous page"
         onClick={handlePreviousPage}
         isDisabled={!hasPreviousPage}
         isLoading={loading}
@@ -38,6 +41,7 @@ export const Pagination: FC = () => {
         {Math.ceil(total / PAGINATION_LIMIT)}
       </Text>
       <PrimaryButton
+        aria-label="Next page"
         onClick={handleNextPage}
         isDisabled={!hasNextPage}
         isLoading={loading}

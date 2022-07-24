@@ -2,6 +2,8 @@ import { Box, Flex, Progress } from '@chakra-ui/react';
 
 export const SkeletonClubCard = () => (
   <Box
+    as="article"
+    title="skeleton-card"
     position={'relative'}
     shadow={'md'}
     rounded="md"

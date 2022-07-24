@@ -1,10 +1,10 @@
 import { Box, Grid, GridItem, ResponsiveValue, Text } from '@chakra-ui/react';
 import { FC } from 'react';
-import { useClubsCatalogSelector } from '../../../hooks';
-import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import { useFavoriteTogglerSelector } from '../../../hooks/useFavoriteTogglerSelector';
-import { toggleClubFavoriteRequest } from '../../../redux/slices/favoriteToggler';
-import { ClubCard, SkeletonClubCard } from '../../ui';
+import { useClubsCatalogSelector } from '../../../../../hooks';
+import { useAppDispatch } from '../../../../../hooks/useAppDispatch';
+import { useFavoriteTogglerSelector } from '../../../../../hooks/useFavoriteTogglerSelector';
+import { toggleClubFavoriteRequest } from '../../../../../redux/slices/favoriteToggler';
+import { ClubCard, SkeletonClubCard } from '../../../../ui';
 import { createRandomArrayOfN } from './utils';
 
 type Props = {
@@ -43,7 +43,12 @@ export const ClubList: FC<Props> = ({ templateColumns }) => {
     );
 
   return (
-    <Grid templateColumns={templateColumns} gap="5" as={'ol'}>
+    <Grid
+      templateColumns={templateColumns}
+      gap="5"
+      as={'ol'}
+      title="Club Catalog"
+    >
       {clubs.map((club) => (
         <GridItem key={club.id} as={'li'} listStyleType="none">
           <ClubCard

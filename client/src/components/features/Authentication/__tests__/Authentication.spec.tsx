@@ -1,30 +1,21 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { delay, put, takeLatest } from 'redux-saga/effects';
-import {
-  loginFailed,
-  loginRequest,
-  loginSucceded,
-} from '../../../../redux/slices/auth';
-import { TestingLayout } from '../../../../testing';
-import { Authentication } from '../Authentication';
 import { INVALID_USER_ERROR } from '../../../../services/constants';
+import { axiosMock } from '../../../../testing/utils';
+import { renderWithProviders } from '../../../../testing/utils/redux-utils';
+import { Authentication } from '../Authentication';
 
 describe('<Authentication>', () => {
-  it('should dissapear if the credentials were correct', async () => {
-    function* loginUser() {
-      yield delay(200);
-      yield put(loginSucceded({ user: {} }));
-    }
+  afterEach(() => {
+    axiosMock.reset();
+  });
 
-    function* loginSaga() {
-      yield takeLatest(loginRequest, loginUser);
-    }
-    const { container } = render(
-      <TestingLayout sagas={loginSaga}>
-        <Authentication />
-      </TestingLayout>
-    );
+  it('should dissapear if the credentials were correct', async () => {
+    axiosMock
+      .onPost('/login', { email: 'fake.user@fake.com', password: '123' })
+      .reply(200, { token: 'un_token' });
+
+    const { container } = renderWithProviders(<Authentication />);
 
     const emailInput = screen.getByLabelText('Email');
     const passwordInput = screen.getByLabelText('Password');
@@ -42,19 +33,11 @@ describe('<Authentication>', () => {
   });
 
   it('should show an error if the credentials were not correct', async () => {
-    function* loginUser() {
-      yield delay(200);
-      yield put(loginFailed({ error: INVALID_USER_ERROR }));
-    }
+    axiosMock
+      .onPost('/login', { email: 'fake.user@fake.com', password: '1234' })
+      .reply(401, { message: INVALID_USER_ERROR });
 
-    function* loginSaga() {
-      yield takeLatest(loginRequest, loginUser);
-    }
-    render(
-      <TestingLayout sagas={loginSaga}>
-        <Authentication />
-      </TestingLayout>
-    );
+    renderWithProviders(<Authentication />);
 
     const emailInput = screen.getByLabelText('Email');
     const passwordInput = screen.getByLabelText('Password');

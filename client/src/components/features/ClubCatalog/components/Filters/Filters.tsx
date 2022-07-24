@@ -6,12 +6,12 @@ import {
   ListItem,
   useMediaQuery,
 } from '@chakra-ui/react';
-import { FC, useCallback, useEffect, useState } from 'react';
-import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { FC, useEffect, useState } from 'react';
+import { useAppDispatch } from '../../../../../hooks/useAppDispatch';
 import {
   clubsRequest,
-  updateFavoriteFilter,
-} from '../../../redux/slices/clubsCatalog';
+  applyFavoriteFilter,
+} from '../../../../../redux/slices/clubsCatalog';
 import { FilterHeader } from './components';
 
 import {
@@ -28,27 +28,26 @@ export const Filters: FC = () => {
   const [filterFavorite, setFilterFavorite] =
     useState<FavoriteFilterType>(noFilter);
 
-  const applyFilters = useCallback(() => {
-    dispatch(updateFavoriteFilter(filterFavorite.setFilter()));
-    dispatch(clubsRequest());
-  }, [filterFavorite, dispatch]);
-
-  useEffect(() => {
-    applyFilters();
-  }, [applyFilters]);
-
-  const toggleFilters = () => setshowFilters(!showFilters);
+  const toggleFilters = () => {
+    setshowFilters(!showFilters);
+  };
 
   useEffect(() => {
     if (isXl) setshowFilters(true);
     else setshowFilters(false);
   }, [isXl]);
 
+  const handleFavoriteChange = (filter: FavoriteFilterType) => {
+    dispatch(applyFavoriteFilter(filter.setFilter()));
+    dispatch(clubsRequest());
+    setFilterFavorite(filter);
+  };
+
   return (
     <Flex direction="column">
       <FilterHeader onClick={toggleFilters} isShowingFilters={showFilters} />
       <Collapse in={showFilters}>
-        <List>
+        <List title="Favorite filter">
           {[noFilter, favoriteFilter, noFavoriteFilter].map((filter) => (
             <ListItem key={filter.id} ml={4}>
               <Box
@@ -60,7 +59,7 @@ export const Filters: FC = () => {
                 color={
                   filterFavorite.id === filter.id ? 'secondary.main' : 'text'
                 }
-                onClick={() => setFilterFavorite(filter)}
+                onClick={() => handleFavoriteChange(filter)}
               >
                 {filter.label}
               </Box>

@@ -3,11 +3,11 @@ import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { getClubs, updateClubFavorite } from '../../services';
 import { sessionExpired } from '../slices/auth';
 import {
+  ClubsCatalogState,
   clubsRequest,
   ClubsRequestActionType,
   clubsRequestFailed,
   clubsRequestSucceeded,
-  ClubsCatalogState,
   selectClubsCatalog,
   updateClubFromCatalog,
 } from '../slices/clubsCatalog';

@@ -54,7 +54,7 @@ export const clubsCatalogSlice = createSlice({
       };
     },
 
-    updateNameFilter: (
+    applyNameFilter: (
       state,
       action: PayloadAction<NameFilterUpdateActionType>
     ) => {
@@ -64,7 +64,7 @@ export const clubsCatalogSlice = createSlice({
       };
     },
 
-    updateFavoriteFilter: (
+    applyFavoriteFilter: (
       state,
       action: PayloadAction<FilterFavoriteUpdateActionType>
     ) => {
@@ -106,8 +106,8 @@ export const {
   clubsRequestSucceeded,
   clubsRequestFailed,
   updateClubFromCatalog,
-  updateNameFilter,
-  updateFavoriteFilter,
+  applyNameFilter,
+  applyFavoriteFilter,
 } = clubsCatalogSlice.actions;
 
 export const selectClubsCatalog = (state: RootState) => state.clubs;
