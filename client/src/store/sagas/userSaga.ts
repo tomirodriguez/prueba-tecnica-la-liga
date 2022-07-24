@@ -13,23 +13,24 @@ import {
   sessionIsOpen,
 } from '../slices/auth';
 
-function* loginUser(action: PayloadAction<LoginRequestActionType>) {
+export function* loginUser(action: PayloadAction<LoginRequestActionType>) {
   const { token, error } = yield call(authenticate, action.payload);
 
-  if (token) yield put({ type: loginSucceded, payload: { user: {} } });
-  else yield put({ type: loginFailed, payload: { error } });
+  if (token) yield put(loginSucceded({ user: {} }));
+  else yield put(loginFailed({ error }));
 }
 
-function* checkUser() {
+export function* checkUser() {
   const { error } = yield call(getClubs, {});
 
-  if (!error) yield put({ type: sessionIsOpen });
-  else yield put({ type: sessionExpired });
+  if (!error) yield put(sessionIsOpen);
+  else yield put(sessionExpired);
 }
 
-function* endSession() {
+export function* endSession() {
+  console.log('LLEGA ACA ?');
   yield call(logout);
-  yield put({ type: logoutSucceeded });
+  yield put(logoutSucceeded);
 }
 
 function* userSaga() {
