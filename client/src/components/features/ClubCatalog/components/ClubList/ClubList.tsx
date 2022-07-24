@@ -1,10 +1,10 @@
-import { Box, Grid, GridItem, ResponsiveValue, Text } from '@chakra-ui/react';
+import { Grid, GridItem, ResponsiveValue } from '@chakra-ui/react';
 import { FC } from 'react';
 import { useClubsCatalogSelector } from '../../../../../hooks';
 import { useAppDispatch } from '../../../../../hooks/useAppDispatch';
 import { useFavoriteTogglerSelector } from '../../../../../hooks/useFavoriteTogglerSelector';
 import { toggleClubFavoriteRequest } from '../../../../../redux/slices/favoriteToggler';
-import { ClubCard } from '../../../../ui';
+import { ClubCard, NoClubsFound } from '../../../../ui';
 import { SkeletonClubList } from '../../../../ui/SkeletonClubList';
 
 type Props = {
@@ -23,15 +23,7 @@ export const ClubList: FC<Props> = ({ templateColumns }) => {
     dispatch(toggleClubFavoriteRequest({ clubId, favorite }));
   };
 
-  if (clubs.length === 0)
-    return (
-      <Box mx="auto" maxW={300} my={8}>
-        <Text fontSize={'lg'} textAlign="center">
-          No se encontraron resultados para la busqueda que desea realizar.
-          Intente de nuevo.
-        </Text>
-      </Box>
-    );
+  if (clubs.length === 0) return <NoClubsFound />;
 
   return (
     <Grid

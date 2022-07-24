@@ -1,6 +1,6 @@
 import { Grid, GridItem, ResponsiveValue } from '@chakra-ui/react';
 import { FC } from 'react';
-import { createRandomArrayOfN } from '../features/ClubCatalog/components/ClubList/utils';
+import { createRandomArrayOfN } from '../../utils';
 import { SkeletonClubCard } from './SkeletonClubCard';
 
 type Props = {
