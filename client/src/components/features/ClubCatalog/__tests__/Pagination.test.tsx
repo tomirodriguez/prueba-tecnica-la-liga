@@ -1,5 +1,4 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
-import { clubsCatalogSlice } from '../../../../redux/slices/clubsCatalog';
 
 import {
   axiosMock,
