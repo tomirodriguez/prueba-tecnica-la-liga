@@ -12,7 +12,7 @@
     "prettier:fix": "yarn prettier --write client/",
     "prettier:check": "yarn prettier --check client/",
     "prepare": "husky install",
-    "pre-commit": "yarn lint && yarn prettier:check",
+    "pre-commit": "yarn lint && yarn prettier:check && yarn typecheck:client",
     "pre-push": " yarn pre-commit && yarn typecheck:client && cd client && yarn test"
   },
   "devDependencies": {
