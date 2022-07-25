@@ -14,6 +14,7 @@ export const App: FC = () => {
 
   useEffect(() => {
     checkUserSession();
+    document.title = 'LaLiga App - Prueba técnica';
   }, [checkUserSession]);
 
   if (checkingSession) return <LoadingScreen />;

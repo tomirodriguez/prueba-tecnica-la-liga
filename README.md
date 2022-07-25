@@ -249,3 +249,13 @@ No obstante, si esta solicitud es completada y efectivamente hay un usuario, est
 Actualmente, a pesar de hacer esa llamada para checkear al usuario, el catalogo vuelve hacer una llamada para obtener el listado de clubes, ya que es quien realmente deberia obtener esa informacion, y no un metodo para checkear si hay un usuario.
 
 Si bien en la practica podria funcionar, no me gustaria depender de obtener los datos a traves de este metodo, ya que si el dia de manana hay un usuario y necesito obtener su datos para ver si hay una sesion abierta, tendria que delegar la busqueda del catalogo a otro lado ya que quien me brindaba la informacion anteriormente no lo estaria haciendo mas.
+
+</br>
+
+### Pendientes
+
+---
+
+- Migrar todo tipo de texto fuera de los coponentes, y llevarlo a un archivo i18n aparte. Permite a la vez soportar distintos idiomas.
+
+- Vista mas en detalle de los clubes, con mas informacion acerca de las temporadas y los jugadores.
