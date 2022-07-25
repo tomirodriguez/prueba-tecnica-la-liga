@@ -36,7 +36,7 @@ export const Pagination: FC = () => {
       >
         Anterior
       </PrimaryButton>
-      <Text mx="4">
+      <Text mx="4" aria-label="Page count" role="contentinfo">
         {Math.floor(offset / PAGINATION_LIMIT) + 1}/
         {Math.ceil(total / PAGINATION_LIMIT)}
       </Text>

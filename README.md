@@ -131,5 +131,5 @@ DONT FORGET!!!
   Explicar por que uni tests de redux y sagas
   Agregar explicacion de env.template
   Agregar handleo de bad request en clubs si tengo tiempo
-  Mensaje de error - explicacion accesibilidad
+  Mensaje de error en login form - explicacion accesibilidad
   

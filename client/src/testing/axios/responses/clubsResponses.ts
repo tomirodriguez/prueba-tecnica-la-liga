@@ -1,19 +1,26 @@
 import { CLUBS_DB } from '../mocks';
 
-type GetMockedClubsProps = {
+type GetMockedClubsParams = {
   limit?: number;
   offset?: number;
   name_like?: string;
   favorite?: boolean;
 };
 
-export const getMockedClubs = ({
-  limit = 6,
-  offset = 0,
-  name_like,
-  favorite,
-}: GetMockedClubsProps) => {
+type GetMockedClubsOptions = {
+  maxClubs?: number;
+};
+
+export const getMockedClubs = (
+  params?: GetMockedClubsParams,
+  options?: GetMockedClubsOptions
+) => {
+  const { limit = 6, offset = 0, name_like, favorite } = params || {};
+  const { maxClubs } = options || {};
+
   let { results } = CLUBS_DB;
+
+  if (maxClubs) results = results.slice(0, maxClubs);
 
   if (name_like)
     results = results.filter((club) =>
