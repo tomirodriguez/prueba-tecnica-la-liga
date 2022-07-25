@@ -1,5 +1,4 @@
 import {
-  Button,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -8,6 +7,7 @@ import {
   Input,
 } from '@chakra-ui/react';
 import { ChangeEvent, FC, SyntheticEvent, useState } from 'react';
+import { PrimaryButton } from '../../../ui/PrimaryButton';
 
 type Props = {
   errorMessage: string;
@@ -84,9 +84,9 @@ export const LoginForm: FC<Props> = ({
           )}
         </FormControl>
 
-        <Button mt={5} type="submit" isLoading={isLoading}>
+        <PrimaryButton mt={5} type="submit" isLoading={isLoading}>
           Entrar
-        </Button>
+        </PrimaryButton>
       </Flex>
     </form>
   );
