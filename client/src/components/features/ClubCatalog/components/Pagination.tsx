@@ -2,8 +2,8 @@ import { Flex, Link, Text } from '@chakra-ui/react';
 import { FC } from 'react';
 import { PAGINATION_LIMIT } from '../../../../constants';
 import { useCatalog } from '../../../../hooks';
-import { useClubsCatalogSelector } from '../../../../hooks/useClubsCatalogSelector';
-import { PrimaryButton } from '../../../ui/PrimaryButton';
+import { useClubsCatalogSelector } from '../../../../redux';
+import { PrimaryButton } from '../../../ui';
 
 export const Pagination: FC = () => {
   const { total, offset, loading } = useClubsCatalogSelector();

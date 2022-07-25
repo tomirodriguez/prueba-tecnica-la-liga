@@ -1,7 +1,8 @@
 import { SearchIcon } from '@chakra-ui/icons';
 import { Box, Input, InputGroup, InputLeftAddon, Text } from '@chakra-ui/react';
 import { FC, SyntheticEvent, useRef } from 'react';
-import { useClubsCatalogSelector, useNameFilter } from '../../../../hooks';
+import { useNameFilter } from '../../../../hooks';
+import { useClubsCatalogSelector } from '../../../../redux';
 
 export const SearchBox: FC = () => {
   const applyFilter = useNameFilter();

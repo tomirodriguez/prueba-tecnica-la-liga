@@ -1,8 +1,8 @@
 import { ButtonGroup, Flex, Heading, Spacer } from '@chakra-ui/react';
 import { FC } from 'react';
-import { useLogout } from '../../hooks/useLogout';
+import { useLogout } from '../../hooks';
 import { ResponsiveContainer } from '../../layouts';
-import { PrimaryButton } from '../ui/PrimaryButton';
+import { PrimaryButton } from '../ui';
 
 export const NavBar: FC = () => {
   const logout = useLogout();

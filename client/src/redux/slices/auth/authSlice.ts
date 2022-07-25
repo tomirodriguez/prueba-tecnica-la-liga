@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '../..';
-import { User } from '../../../model';
 import {
-  LoginRequestActionType,
   LoginFailActionType,
+  LoginRequestActionType,
   LoginSuccessActionType,
   SessionIsOpenActionType,
-} from './authActionType';
+} from '.';
+import type { RootState } from '../..';
+import { User } from '../../../model';
 
 export interface AuthState {
   checkingSession: boolean;

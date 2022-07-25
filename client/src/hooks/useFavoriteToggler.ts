@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
-import { toggleClubFavoriteRequest } from '../redux/slices/favoriteToggler';
-import { useAppDispatch } from './useAppDispatch';
+import { toggleClubFavoriteRequest, useAppDispatch } from '../redux';
 
 export const useFavoriteToggler = () => {
   const dispatch = useAppDispatch();

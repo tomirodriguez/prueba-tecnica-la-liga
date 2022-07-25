@@ -7,7 +7,7 @@ import {
   useMediaQuery,
 } from '@chakra-ui/react';
 import { FC, useEffect, useState } from 'react';
-import { useFavoriteFilter } from '../../../../../hooks/useFavoriteFilter';
+import { useFavoriteFilter } from '../../../../../hooks';
 import { FilterHeader } from './components';
 
 import {

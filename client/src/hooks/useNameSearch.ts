@@ -1,6 +1,5 @@
-import { applyNameFilter, clubsRequest } from '../redux/slices/clubsCatalog';
-import { useAppDispatch } from './useAppDispatch';
 import { useCallback } from 'react';
+import { applyNameFilter, clubsRequest, useAppDispatch } from '../redux';
 
 export const useNameFilter = () => {
   const dispatch = useAppDispatch();

@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
-import { loginRequest } from '../redux/slices/auth';
-import { useAppDispatch } from './useAppDispatch';
+import { useAppDispatch, loginRequest } from '../redux';
 
 export const useLogin = () => {
   const dispatch = useAppDispatch();

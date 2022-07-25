@@ -5,3 +5,4 @@ export * from './Footer';
 export * from './SkeletonClubList';
 export * from './LoadingScreen';
 export * from './NoClubsFound';
+export * from './PrimaryButton';

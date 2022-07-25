@@ -7,7 +7,7 @@ import {
   Input,
 } from '@chakra-ui/react';
 import { ChangeEvent, FC, SyntheticEvent, useState } from 'react';
-import { PrimaryButton } from '../../../ui/PrimaryButton';
+import { PrimaryButton } from '../../../ui';
 
 type Props = {
   errorMessage: string;

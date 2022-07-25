@@ -1,10 +1,11 @@
 import { Grid, GridItem, ResponsiveValue } from '@chakra-ui/react';
 import { FC } from 'react';
-import { useClubsCatalogSelector } from '../../../../../hooks';
-import { useFavoriteToggler } from '../../../../../hooks/useFavoriteToggler';
-import { useFavoriteTogglerSelector } from '../../../../../hooks/useFavoriteTogglerSelector';
-import { ClubCard, NoClubsFound } from '../../../../ui';
-import { SkeletonClubList } from '../../../../ui/SkeletonClubList';
+import { useFavoriteToggler } from '../../../../../hooks';
+import {
+  useClubsCatalogSelector,
+  useFavoriteTogglerSelector,
+} from '../../../../../redux';
+import { ClubCard, NoClubsFound, SkeletonClubList } from '../../../../ui';
 
 type Props = {
   templateColumns?: ResponsiveValue<0 | (string & {})>;

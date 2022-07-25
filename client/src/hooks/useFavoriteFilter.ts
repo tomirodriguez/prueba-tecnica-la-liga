@@ -1,9 +1,5 @@
-import {
-  applyFavoriteFilter,
-  clubsRequest,
-} from '../redux/slices/clubsCatalog';
-import { useAppDispatch } from './useAppDispatch';
 import { useCallback } from 'react';
+import { useAppDispatch, applyFavoriteFilter, clubsRequest } from '../redux';
 
 export const useFavoriteFilter = () => {
   const dispatch = useAppDispatch();

@@ -1,4 +1,4 @@
-import { useAppSelector } from './useAppSelector';
+import { useAppSelector } from '.';
 
 export const useClubsCatalogSelector = () => {
   return useAppSelector((state) => state.clubs);

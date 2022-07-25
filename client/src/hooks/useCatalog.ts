@@ -1,9 +1,5 @@
 import { useCallback } from 'react';
-import {
-  clubsRequest,
-  ClubsRequestActionType,
-} from '../redux/slices/clubsCatalog';
-import { useAppDispatch } from './useAppDispatch';
+import { clubsRequest, ClubsRequestActionType, useAppDispatch } from '../redux';
 
 export const useCatalog = () => {
   const dispatch = useAppDispatch();

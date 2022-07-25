@@ -1,5 +1,4 @@
-import { checkUserSession } from '../redux/slices/auth';
-import { useAppDispatch } from './useAppDispatch';
+import { checkUserSession, useAppDispatch } from '../redux';
 import { useCallback } from 'react';
 
 export const useCheckUserSession = () => {

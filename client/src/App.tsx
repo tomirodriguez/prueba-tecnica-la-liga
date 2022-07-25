@@ -3,8 +3,9 @@ import { FC, useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { RequireAuth } from './components/hoc';
 import { LoadingScreen } from './components/ui';
-import { useAuthSelector, useCheckUserSession } from './hooks';
+import { useCheckUserSession } from './hooks';
 import { ClubsPage, LoginPage } from './pages';
+import { useAuthSelector } from './redux';
 
 export const App: FC = () => {
   const { checkingSession } = useAuthSelector();

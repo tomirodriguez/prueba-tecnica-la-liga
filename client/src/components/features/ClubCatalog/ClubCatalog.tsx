@@ -1,6 +1,6 @@
 import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
 import { FC, useEffect } from 'react';
-import { useCatalog } from '../../../hooks/useCatalog';
+import { useCatalog } from '../../../hooks';
 import { ClubList, Filters, Pagination, SearchBox } from './components';
 
 export const ClubCatalog: FC = () => {

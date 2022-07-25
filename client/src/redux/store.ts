@@ -4,10 +4,12 @@ import {
   PreloadedState,
 } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-import rootSaga from './sagas/index';
-import { authReducer } from './slices/auth';
-import { clubsCatalogReducer } from './slices/clubsCatalog/clubsCatalogSlice';
-import { favoriteTogglerReducer } from './slices/favoriteToggler/favoriteTogglerSlice';
+import {
+  authReducer,
+  clubsCatalogReducer,
+  favoriteTogglerReducer,
+  rootSaga,
+} from '.';
 
 const rootReducer = combineReducers({
   auth: authReducer,

@@ -1,7 +1,7 @@
 import { Grid, GridItem, ResponsiveValue } from '@chakra-ui/react';
 import { FC } from 'react';
+import { SkeletonClubCard } from '.';
 import { createRandomArrayOfN } from '../../utils';
-import { SkeletonClubCard } from './SkeletonClubCard';
 
 type Props = {
   amount?: number;

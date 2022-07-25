@@ -1,5 +1,6 @@
 import { Button } from '@chakra-ui/react';
-import { useAuthSelector, useLogin } from '../../../hooks';
+import { useLogin } from '../../../hooks';
+import { useAuthSelector } from '../../../redux';
 import { LoginForm } from './components';
 
 export const Authentication = () => {

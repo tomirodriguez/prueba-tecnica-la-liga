@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ToggleFavoriteActionType } from '.';
+import { ToggleFavoriteActionType, ToggleFavoriteFailedActionType } from '.';
 import type { RootState } from '../..';
-import { ToggleFavoriteFailedActionType } from './favoriteTogglerActionType';
 
 export interface FavoriteTogglerState {
   loading: boolean;
@@ -58,6 +57,7 @@ export const {
   toggleClubFavoriteRequestFailed,
 } = favoriteTogglerSlice.actions;
 
-export const selectClubs = (state: RootState) => state.favoriteToggler;
+export const selectFavoriteToggler = (state: RootState) =>
+  state.favoriteToggler;
 
 export const favoriteTogglerReducer = favoriteTogglerSlice.reducer;
