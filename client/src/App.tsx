@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, useColorMode } from '@chakra-ui/react';
 import { FC, useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { RequireAuth } from './components/hoc';
@@ -10,6 +10,7 @@ import { useAuthSelector } from './redux';
 export const App: FC = () => {
   const { checkingSession } = useAuthSelector();
   const checkUserSession = useCheckUserSession();
+  const { colorMode } = useColorMode();
 
   useEffect(() => {
     checkUserSession();
@@ -18,7 +19,7 @@ export const App: FC = () => {
   if (checkingSession) return <LoadingScreen />;
 
   return (
-    <Box>
+    <Box bg={`${colorMode}.bg.main`}>
       <Routes>
         <Route path="login" element={<LoginPage />} />
         <Route

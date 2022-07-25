@@ -1,14 +1,14 @@
 import { ChakraProvider } from '@chakra-ui/react';
+import { StrictMode } from 'react';
 
+import { ColorModeScript } from '@chakra-ui/react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { App } from './App';
-import { ThemeContext, ThemeProvider } from './context';
 import { setupStore } from './redux';
 import reportWebVitals from './reportWebVitals';
 import './styles/global.css';
-import { darkTheme } from './themes/darkTheme';
 import { lightTheme } from './themes/lightTheme';
 
 const root = ReactDOM.createRoot(
@@ -16,24 +16,16 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  // <React.StrictMode>
-  <ThemeProvider>
-    <ThemeContext.Consumer>
-      {(value) => (
-        <ChakraProvider
-          theme={value.isDarkMode ? darkTheme : lightTheme}
-          resetCSS
-        >
-          <Provider store={setupStore()}>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </Provider>
-        </ChakraProvider>
-      )}
-    </ThemeContext.Consumer>
-  </ThemeProvider>
-  // </React.StrictMode>
+  <StrictMode>
+    <ChakraProvider theme={lightTheme} resetCSS>
+      <Provider store={setupStore()}>
+        <BrowserRouter>
+          <ColorModeScript initialColorMode={lightTheme.initialColorMode} />
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </ChakraProvider>
+  </StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

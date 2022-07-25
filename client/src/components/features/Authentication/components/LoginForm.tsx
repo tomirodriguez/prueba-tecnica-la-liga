@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { ChangeEvent, FC, SyntheticEvent, useState } from 'react';
 import { PrimaryButton } from '../../../ui';
+import { useColorMode } from '@chakra-ui/react';
 
 type Props = {
   errorMessage: string;
@@ -29,6 +30,7 @@ export const LoginForm: FC<Props> = ({
 }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { colorMode } = useColorMode();
 
   const handleFormSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
@@ -52,10 +54,10 @@ export const LoginForm: FC<Props> = ({
         w={300}
         shadow={'md'}
         rounded={'md'}
-        background={'bg.card'}
+        background={`${colorMode}.bg.card`}
         padding={30}
         border={'1px'}
-        borderColor={errorMessage ? 'red' : 'bg.card'}
+        borderColor={errorMessage ? 'red' : `${colorMode}.bg.card`}
       >
         <FormControl>
           <FormLabel htmlFor="email">Email</FormLabel>

@@ -1,5 +1,12 @@
 import { SearchIcon } from '@chakra-ui/icons';
-import { Box, Input, InputGroup, InputLeftAddon, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  Text,
+  useColorMode,
+} from '@chakra-ui/react';
 import { FC, SyntheticEvent, useRef } from 'react';
 import { useNameFilter } from '../../../../hooks';
 import { useClubsCatalogSelector } from '../../../../redux';
@@ -8,6 +15,7 @@ export const SearchBox: FC = () => {
   const applyFilter = useNameFilter();
   const { total } = useClubsCatalogSelector();
   const inputRef = useRef<HTMLInputElement>(null);
+  const { colorMode } = useColorMode();
 
   const handleFormSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
@@ -24,7 +32,7 @@ export const SearchBox: FC = () => {
       <form onSubmit={handleFormSubmit}>
         <InputGroup bg={'white'} rounded="lg" borderColor={'transparent'}>
           <InputLeftAddon
-            bg="secondary.light"
+            bg={`${colorMode}.secondary.light`}
             color="white"
             children={<SearchIcon />}
           />
@@ -32,11 +40,17 @@ export const SearchBox: FC = () => {
             role={'searchbox'}
             title="Search box"
             type="text"
-            backgroundColor="bg.card"
+            backgroundColor={`${colorMode}.bg.card`}
             placeholder="Qué club desea buscar"
             ref={inputRef}
-            _focus={{ outline: 'none', borderColor: 'secondary.main' }}
-            _hover={{ outline: 'none', borderColor: 'secondary.main' }}
+            _focus={{
+              outline: 'none',
+              borderColor: `${colorMode}.secondary.main`,
+            }}
+            _hover={{
+              outline: 'none',
+              borderColor: `${colorMode}.secondary.main`,
+            }}
           />
         </InputGroup>
       </form>

@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { FC, ChangeEvent } from 'react';
 import { Club } from '../../model';
+import { useColorMode } from '@chakra-ui/react';
 
 type Props = {
   club: Club;
@@ -25,6 +26,7 @@ export const ClubCard: FC<Props> = ({
   onFavoriteToggle,
 }) => {
   const { avatar, foundationDate, name } = club;
+  const { colorMode } = useColorMode();
 
   const handleSwitchChange = (event: ChangeEvent<HTMLInputElement>) => {
     onFavoriteToggle(club.id, event.target.checked);
@@ -36,7 +38,7 @@ export const ClubCard: FC<Props> = ({
         as="article"
         title={club.name}
         rounded="md"
-        bg="bg.card"
+        bg={`${colorMode}.bg.card`}
         p="4"
         cursor={'pointer'}
         shadow={'md'}

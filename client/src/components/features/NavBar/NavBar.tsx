@@ -1,4 +1,11 @@
-import { Box, ButtonGroup, Flex, Heading, Spacer } from '@chakra-ui/react';
+import {
+  Box,
+  ButtonGroup,
+  Flex,
+  Heading,
+  Spacer,
+  useColorMode,
+} from '@chakra-ui/react';
 import { FC } from 'react';
 import { useLogout } from '../../../hooks';
 import { ResponsiveContainer } from '../../../layouts';
@@ -7,13 +14,14 @@ import { ThemeToggler } from './ThemeToggler';
 
 export const NavBar: FC = () => {
   const logout = useLogout();
+  const { colorMode } = useColorMode();
 
   return (
     <Flex
       w={'full'}
       position={'sticky'}
       top={0}
-      bg="primary.main"
+      bg={`${colorMode}.primary.main`}
       color="white"
       shadow={'2xl'}
       align="center"

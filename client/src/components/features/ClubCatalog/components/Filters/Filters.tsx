@@ -9,6 +9,7 @@ import {
 import { FC, useEffect, useState } from 'react';
 import { useFavoriteFilter } from '../../../../../hooks';
 import { FilterHeader } from './components';
+import { useColorMode } from '@chakra-ui/react';
 
 import {
   favoriteFilter,
@@ -19,6 +20,7 @@ import {
 
 export const Filters: FC = () => {
   const applyFilter = useFavoriteFilter();
+  const { colorMode } = useColorMode();
   const [isXl] = useMediaQuery('(min-width: 1280px)');
   const [showFilters, setshowFilters] = useState(false);
   const [filterFavorite, setFilterFavorite] =
@@ -52,7 +54,9 @@ export const Filters: FC = () => {
                 fontSize={'lg'}
                 fontWeight={filterFavorite.id === filter.id ? 'bold' : 'normal'}
                 color={
-                  filterFavorite.id === filter.id ? 'secondary.main' : 'text'
+                  filterFavorite.id === filter.id
+                    ? `${colorMode}.secondary.main`
+                    : 'text'
                 }
                 onClick={() => handleFavoriteChange(filter)}
               >

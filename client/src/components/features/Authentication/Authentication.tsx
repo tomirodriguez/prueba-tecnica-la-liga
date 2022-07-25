@@ -1,4 +1,3 @@
-import { Button } from '@chakra-ui/react';
 import { useLogin } from '../../../hooks';
 import { useAuthSelector } from '../../../redux';
 import { LoginForm } from './components';
@@ -19,22 +18,11 @@ export const Authentication = () => {
     login(email, password);
   };
 
-  const autoLogin = () => {
-    login('fake.user@fake.com', '123');
-  };
-
   return (
-    <>
-      <LoginForm
-        errorMessage={error}
-        isLoading={loading}
-        onFormSubmit={onFormSubmit}
-      />
-      {process.env.NODE_ENV === 'development' && (
-        <Button mt={5} onClick={autoLogin}>
-          Auto Login
-        </Button>
-      )}
-    </>
+    <LoginForm
+      errorMessage={error}
+      isLoading={loading}
+      onFormSubmit={onFormSubmit}
+    />
   );
 };
