@@ -7,6 +7,7 @@ import {
 } from '../../../../testing';
 
 import { ClubCatalog } from '../ClubCatalog';
+import userEvent from '@testing-library/user-event';
 
 // Se hace un mock del useMediaQuery ya que no existe "window" en los tests.
 // Si no se hiciese, romperia el test por no estar definida.
@@ -32,7 +33,7 @@ describe('<Catalog>', () => {
 
     renderWithProviders(<ClubCatalog />);
 
-    const searchBox = screen.getByRole('searchbox', {
+    const searchContainer = screen.getByRole('search', {
       name: 'Search club by name',
     });
 
@@ -42,7 +43,7 @@ describe('<Catalog>', () => {
       ).toHaveLength(6);
     });
 
-    expect(searchBox).toHaveTextContent('Se encontraron 20 clubes.');
+    expect(searchContainer).toHaveTextContent('Se encontraron 20 clubes.');
   });
 
   it('should filter by favorites correctly', async () => {
@@ -58,7 +59,7 @@ describe('<Catalog>', () => {
     const favorites = within(filters).getByText('Favoritos');
     const notFavorites = within(filters).getByText('No favoritos');
 
-    const searchBox = screen.getByRole('searchbox', {
+    const searchContainer = screen.getByRole('search', {
       name: 'Search club by name',
     });
 
@@ -76,7 +77,7 @@ describe('<Catalog>', () => {
       ).toBe(4);
     });
 
-    expect(searchBox).toHaveTextContent('Se encontraron 4 clubes.');
+    expect(searchContainer).toHaveTextContent('Se encontraron 4 clubes.');
 
     fireEvent.click(notFavorites);
 
@@ -86,7 +87,7 @@ describe('<Catalog>', () => {
       ).toBe(6);
     });
 
-    expect(searchBox).toHaveTextContent('Se encontraron 16 clubes.');
+    expect(searchContainer).toHaveTextContent('Se encontraron 16 clubes.');
 
     fireEvent.click(all);
 
@@ -96,6 +97,38 @@ describe('<Catalog>', () => {
       ).toBe(6);
     });
 
-    expect(searchBox).toHaveTextContent('Se encontraron 20 clubes.');
+    expect(searchContainer).toHaveTextContent('Se encontraron 20 clubes.');
+  });
+
+  it('should filter by name correctly', async () => {
+    axiosMock
+      .onGet('/api/clubs', { limit: 6, offset: 0, name_like: '' })
+      .reply((config) => [200, getMockedClubs({ ...config.params })]);
+
+    renderWithProviders(<ClubCatalog />);
+
+    const searchContainer = screen.getByRole('search');
+
+    const searchBox = within(searchContainer).getByRole('searchbox', {
+      name: 'Search box',
+    });
+
+    await waitFor(() => {
+      expect(searchContainer).toHaveTextContent('Se encontraron 20 clubes.');
+    });
+
+    userEvent.type(searchBox, 'filtro nombre');
+    fireEvent.submit(searchBox);
+
+    await waitFor(() => {
+      expect(searchContainer).toHaveTextContent('Se encontraron 3 clubes.');
+    });
+
+    userEvent.clear(searchBox);
+    fireEvent.submit(searchBox);
+
+    await waitFor(() => {
+      expect(searchContainer).toHaveTextContent('Se encontraron 20 clubes.');
+    });
   });
 });

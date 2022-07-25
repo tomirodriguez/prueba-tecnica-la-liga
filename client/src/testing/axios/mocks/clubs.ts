@@ -51,7 +51,7 @@ export const CLUBS_DB = {
     },
     {
       id: 'edfcf612-2da2-4b04-b01a-17eae7e0e7d5',
-      name: 'Stoke City',
+      name: 'Filtro Nombre 1',
       foundationDate: '1979-08-23T11:29:20.559Z',
       avatar: 'https://placeimg.com/291/312',
       favorite: false,
@@ -65,14 +65,14 @@ export const CLUBS_DB = {
     },
     {
       id: '49c2ebf7-f28c-40a8-bd98-f64bc2986ea4',
-      name: 'Burnley',
+      name: 'Filtro Nombre 2',
       foundationDate: '2006-08-06T02:41:12.434Z',
       avatar: 'https://placeimg.com/290/306',
       favorite: true,
     },
     {
       id: '57c5858e-f09d-4157-b144-9e34cf142d3e',
-      name: 'Middlesbrough',
+      name: 'Filtro Nombre 3',
       foundationDate: '1968-11-17T09:46:28.074Z',
       avatar: 'https://placeimg.com/306/297',
       favorite: false,

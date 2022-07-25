@@ -39,12 +39,13 @@ export const SearchBox: FC = () => {
             type="text"
             placeholder="Qué club desea buscar"
             ref={inputRef}
+            _focus={{ outline: 'none', borderColor: 'secondary.main' }}
           />
         </InputGroup>
       </form>
       <Box mt={2} fontSize="sm" title="Search results">
         {total === 0 && <Text>No se encontraron clubes.</Text>}
-        {total === 1 && <Text>Se encontro 1 club.</Text>}
+        {total === 1 && <Text>Se encontró 1 club.</Text>}
         {total > 1 && <Text>Se encontraron {total} clubes.</Text>}
       </Box>
     </Box>
