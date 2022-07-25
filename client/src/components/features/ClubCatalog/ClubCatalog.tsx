@@ -27,10 +27,13 @@ export const ClubCatalog: FC = () => {
             templateColumns={{ base: 'repeat(1,1fr)', md: 'repeat(2,1fr)' }}
           />
         </GridItem>
+
+        <GridItem colSpan={{ base: 1, xl: 2 }} colStart={{ base: 1, xl: 2 }}>
+          <Flex justify={'center'}>
+            <Pagination />
+          </Flex>
+        </GridItem>
       </Grid>
-      <Flex mt="8" justify={{ base: 'center', xl: 'end' }}>
-        <Pagination />
-      </Flex>
     </Box>
   );
 };

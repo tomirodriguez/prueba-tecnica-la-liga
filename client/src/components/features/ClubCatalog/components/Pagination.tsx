@@ -1,13 +1,14 @@
-import { Flex, Link, Text } from '@chakra-ui/react';
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import { Button, Flex, Link, Text, useColorMode } from '@chakra-ui/react';
 import { FC } from 'react';
 import { PAGINATION_LIMIT } from '../../../../constants';
 import { useCatalog } from '../../../../hooks';
 import { useClubsCatalogSelector } from '../../../../redux';
-import { PrimaryButton } from '../../../ui';
 
 export const Pagination: FC = () => {
   const { total, offset, loading } = useClubsCatalogSelector();
   const updateCatalog = useCatalog();
+  const { colorMode } = useColorMode();
 
   if (total === 0) return null;
 
@@ -31,28 +32,32 @@ export const Pagination: FC = () => {
         Estoy sobreescribiendo con style ya que textDecoration/textDecor no funciona correctamente
       */}
       <Link href="#catalog" style={{ textDecoration: 'none' }}>
-        <PrimaryButton
+        <Button
+          bg={'transparent'}
           aria-label="Previous page"
           onClick={handlePreviousPage}
           isDisabled={!hasPreviousPage}
           isLoading={loading}
+          color={`${colorMode}.secondary.main`}
         >
-          Anterior
-        </PrimaryButton>
+          <ChevronLeftIcon boxSize={8} />
+        </Button>
       </Link>
       <Text mx="4" aria-label="Page count" role="contentinfo">
         {Math.floor(offset / PAGINATION_LIMIT) + 1}/
         {Math.ceil(total / PAGINATION_LIMIT)}
       </Text>
       <Link href="#catalog" style={{ textDecoration: 'none' }}>
-        <PrimaryButton
+        <Button
           aria-label="Next page"
+          bg={'transparent'}
           onClick={handleNextPage}
           isDisabled={!hasNextPage}
           isLoading={loading}
+          color={`${colorMode}.secondary.main`}
         >
-          Siguiente
-        </PrimaryButton>
+          <ChevronRightIcon boxSize={8} />
+        </Button>
       </Link>
     </Flex>
   );
