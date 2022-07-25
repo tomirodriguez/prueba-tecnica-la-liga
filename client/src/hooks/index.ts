@@ -5,3 +5,4 @@ export * from './useLogout';
 export * from './useLogin';
 export * from './useCatalog';
 export * from './useFavoriteToggler';
+export * from './useIsDarkMode';

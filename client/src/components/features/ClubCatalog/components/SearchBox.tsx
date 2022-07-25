@@ -22,7 +22,7 @@ export const SearchBox: FC = () => {
   return (
     <Box title="Search club by name" role={'search'}>
       <form onSubmit={handleFormSubmit}>
-        <InputGroup bg={'white'} rounded="md">
+        <InputGroup bg={'white'} rounded="lg" borderColor={'transparent'}>
           <InputLeftAddon
             bg="secondary.light"
             color="white"
@@ -32,9 +32,11 @@ export const SearchBox: FC = () => {
             role={'searchbox'}
             title="Search box"
             type="text"
+            backgroundColor="bg.card"
             placeholder="Qué club desea buscar"
             ref={inputRef}
             _focus={{ outline: 'none', borderColor: 'secondary.main' }}
+            _hover={{ outline: 'none', borderColor: 'secondary.main' }}
           />
         </InputGroup>
       </form>

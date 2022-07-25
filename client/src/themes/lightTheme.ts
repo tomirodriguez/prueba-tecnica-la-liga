@@ -1,8 +1,13 @@
-import { extendTheme } from '@chakra-ui/react';
+import { extendTheme, type ThemeConfig } from '@chakra-ui/react';
 
-export const lightTheme = extendTheme({
+export const lightTheme: ThemeConfig = extendTheme({
+  initialColorMode: 'light',
+  useSystemColorMode: false,
   colors: {
-    bg: '#eeeeee',
+    bg: {
+      main: '#eeeeee',
+      card: '#ffffff',
+    },
     primary: {
       main: '#f44336',
       light: '#ff7961',
@@ -16,6 +21,14 @@ export const lightTheme = extendTheme({
     brand: {
       100: '#f7fafc',
       900: '#1a202c',
+    },
+  },
+  styles: {
+    global: {
+      body: {
+        color: '#1A202C',
+        backgroundColor: '#eeeeee',
+      },
     },
   },
 });

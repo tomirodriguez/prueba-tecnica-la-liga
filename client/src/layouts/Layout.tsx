@@ -2,11 +2,12 @@ import { Box, VStack } from '@chakra-ui/react';
 import { FC, PropsWithChildren } from 'react';
 import { ResponsiveContainer } from '.';
 import { NavBar } from '../components/features';
+
 import { Footer } from '../components/ui';
 
 export const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
   return (
-    <VStack minH={'100vh'} bg={'bg'} position="relative">
+    <VStack minH={'100vh'} position="relative">
       <Box as="header" w="full">
         <NavBar />
       </Box>

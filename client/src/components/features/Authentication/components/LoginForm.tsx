@@ -52,10 +52,10 @@ export const LoginForm: FC<Props> = ({
         w={300}
         shadow={'md'}
         rounded={'md'}
-        background={'white'}
+        background={'bg.card'}
         padding={30}
         border={'1px'}
-        borderColor={errorMessage ? 'red' : 'white'}
+        borderColor={errorMessage ? 'red' : 'bg.card'}
       >
         <FormControl>
           <FormLabel htmlFor="email">Email</FormLabel>
