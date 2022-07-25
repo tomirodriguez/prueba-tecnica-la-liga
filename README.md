@@ -259,3 +259,5 @@ Si bien en la practica podria funcionar, no me gustaria depender de obtener los 
 - Migrar todo tipo de texto fuera de los coponentes, y llevarlo a un archivo i18n aparte. Permite a la vez soportar distintos idiomas.
 
 - Vista mas en detalle de los clubes, con mas informacion acerca de las temporadas y los jugadores.
+
+- Mejorar el paginador. El diseño quedó pobre en comparacion a lo que tenía planeado.
