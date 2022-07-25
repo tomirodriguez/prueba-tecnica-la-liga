@@ -1,34 +1,38 @@
-import { Box, Flex, Progress } from '@chakra-ui/react';
+import { Box, Flex, Progress, useColorMode } from '@chakra-ui/react';
 
-export const SkeletonClubCard = () => (
-  <Box
-    as="article"
-    title="skeleton-card"
-    position={'relative'}
-    shadow={'md'}
-    rounded="md"
-    bg="white"
-    p="4"
-    cursor={'pointer'}
-  >
-    <Flex gap={3}>
-      <Progress
-        colorScheme="gray"
-        isIndeterminate
-        rounded="5"
-        boxSize={{ base: '28', xl: '36' }}
-      />
+export const SkeletonClubCard = () => {
+  const { colorMode } = useColorMode();
 
-      <Flex flexDir={'column'} flexGrow={1}>
+  return (
+    <Box
+      as="article"
+      title="skeleton-card"
+      position={'relative'}
+      shadow={'md'}
+      rounded="md"
+      bg={`${colorMode}.bg.card`}
+      p="4"
+      cursor={'pointer'}
+    >
+      <Flex gap={3}>
         <Progress
-          mb="2"
           colorScheme="gray"
           isIndeterminate
-          h={'6'}
           rounded="5"
+          boxSize={{ base: '28', xl: '36' }}
         />
-        <Progress colorScheme="gray" isIndeterminate h={'4'} rounded="5" />
+
+        <Flex flexDir={'column'} flexGrow={1}>
+          <Progress
+            mb="2"
+            colorScheme="gray"
+            isIndeterminate
+            h={'6'}
+            rounded="5"
+          />
+          <Progress colorScheme="gray" isIndeterminate h={'4'} rounded="5" />
+        </Flex>
       </Flex>
-    </Flex>
-  </Box>
-);
+    </Box>
+  );
+};
