@@ -7,11 +7,7 @@ import {
   useMediaQuery,
 } from '@chakra-ui/react';
 import { FC, useEffect, useState } from 'react';
-import { useAppDispatch } from '../../../../../hooks/useAppDispatch';
-import {
-  clubsRequest,
-  applyFavoriteFilter,
-} from '../../../../../redux/slices/clubsCatalog';
+import { useFavoriteFilter } from '../../../../../hooks/useFavoriteFilter';
 import { FilterHeader } from './components';
 
 import {
@@ -22,7 +18,7 @@ import {
 } from './utils';
 
 export const Filters: FC = () => {
-  const dispatch = useAppDispatch();
+  const applyFilter = useFavoriteFilter();
   const [isXl] = useMediaQuery('(min-width: 1280px)');
   const [showFilters, setshowFilters] = useState(false);
   const [filterFavorite, setFilterFavorite] =
@@ -38,8 +34,7 @@ export const Filters: FC = () => {
   }, [isXl]);
 
   const handleFavoriteChange = (filter: FavoriteFilterType) => {
-    dispatch(applyFavoriteFilter(filter.setFilter()));
-    dispatch(clubsRequest());
+    applyFilter(filter.filterFavorite);
     setFilterFavorite(filter);
   };
 

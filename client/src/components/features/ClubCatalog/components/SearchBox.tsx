@@ -1,15 +1,10 @@
 import { SearchIcon } from '@chakra-ui/icons';
 import { Box, Input, InputGroup, InputLeftAddon, Text } from '@chakra-ui/react';
 import { FC, SyntheticEvent, useRef } from 'react';
-import { useAppDispatch } from '../../../../hooks/useAppDispatch';
-import { useClubsCatalogSelector } from '../../../../hooks/useClubsCatalogSelector';
-import {
-  clubsRequest,
-  applyNameFilter,
-} from '../../../../redux/slices/clubsCatalog';
+import { useClubsCatalogSelector, useNameFilter } from '../../../../hooks';
 
 export const SearchBox: FC = () => {
-  const dispatch = useAppDispatch();
+  const applyFilter = useNameFilter();
   const { total } = useClubsCatalogSelector();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -20,8 +15,7 @@ export const SearchBox: FC = () => {
 
     const nameFilter = inputRef.current.value;
 
-    dispatch(applyNameFilter({ nameFilter }));
-    dispatch(clubsRequest());
+    applyFilter(nameFilter);
   };
 
   return (

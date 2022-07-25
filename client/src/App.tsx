@@ -3,17 +3,16 @@ import { FC, useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { RequireAuth } from './components/hoc';
 import { LoadingScreen } from './components/ui';
-import { useAppDispatch, useAuthSelector } from './hooks';
+import { useAuthSelector, useCheckUserSession } from './hooks';
 import { ClubsPage, LoginPage } from './pages';
-import { checkUserSession } from './redux/slices/auth';
 
 export const App: FC = () => {
   const { checkingSession } = useAuthSelector();
-  const dispatch = useAppDispatch();
+  const checkUserSession = useCheckUserSession();
 
   useEffect(() => {
-    dispatch(checkUserSession());
-  }, [dispatch]);
+    checkUserSession();
+  }, [checkUserSession]);
 
   if (checkingSession) return <LoadingScreen />;
 

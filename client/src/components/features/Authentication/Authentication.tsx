@@ -1,11 +1,10 @@
 import { Button } from '@chakra-ui/react';
-import { useAppDispatch, useAuthSelector } from '../../../hooks';
-import { loginRequest } from '../../../redux/slices/auth';
+import { useAuthSelector, useLogin } from '../../../hooks';
 import { LoginForm } from './components';
 
 export const Authentication = () => {
   const { error, loading, user } = useAuthSelector();
-  const dispatch = useAppDispatch();
+  const login = useLogin();
 
   if (user) return null;
 
@@ -16,11 +15,11 @@ export const Authentication = () => {
     email: string;
     password: string;
   }) => {
-    dispatch(loginRequest({ email, password }));
+    login(email, password);
   };
 
   const autoLogin = () => {
-    dispatch(loginRequest({ email: 'fake.user@fake.com', password: '123' }));
+    login('fake.user@fake.com', '123');
   };
 
   return (
