@@ -25,7 +25,7 @@ export const SearchBox: FC = () => {
   };
 
   return (
-    <Box title="Search club by name" role={'searchbox'}>
+    <Box title="Search club by name" role={'search'}>
       <form onSubmit={handleFormSubmit}>
         <InputGroup bg={'white'} rounded="md">
           <InputLeftAddon
@@ -34,6 +34,8 @@ export const SearchBox: FC = () => {
             children={<SearchIcon />}
           />
           <Input
+            role={'searchbox'}
+            title="Search box"
             type="text"
             placeholder="Qué club desea buscar"
             ref={inputRef}
