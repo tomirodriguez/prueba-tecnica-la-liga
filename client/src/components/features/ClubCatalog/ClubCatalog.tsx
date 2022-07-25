@@ -17,7 +17,7 @@ export const ClubCatalog: FC = () => {
   //   useFavoriteTogglerSelector();
 
   return (
-    <Box>
+    <Box as="section" id="catalog">
       <Grid
         templateColumns={{ base: 'repeat(1,1fr)', xl: 'repeat(3,1fr)' }}
         gap="8"

@@ -1,11 +1,11 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { App } from './App';
-import reportWebVitals from './reportWebVitals';
 import { setupStore } from './redux';
+import reportWebVitals from './reportWebVitals';
+import './styles/global.css';
 import { lightTheme } from './themes/lightTheme';
 
 const root = ReactDOM.createRoot(

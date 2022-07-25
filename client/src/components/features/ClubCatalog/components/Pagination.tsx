@@ -1,4 +1,4 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, Link, Text } from '@chakra-ui/react';
 import { FC } from 'react';
 import { PAGINATION_LIMIT } from '../../../../constants';
 import { useAppDispatch } from '../../../../hooks/useAppDispatch';
@@ -28,26 +28,33 @@ export const Pagination: FC = () => {
 
   return (
     <Flex align={'center'} as="nav" aria-label="Pagination">
-      <PrimaryButton
-        aria-label="Previous page"
-        onClick={handlePreviousPage}
-        isDisabled={!hasPreviousPage}
-        isLoading={loading}
-      >
-        Anterior
-      </PrimaryButton>
+      {/* 
+        Estoy sobreescribiendo con style ya que textDecoration/textDecor no funciona correctamente
+      */}
+      <Link href="#catalog" style={{ textDecoration: 'none' }}>
+        <PrimaryButton
+          aria-label="Previous page"
+          onClick={handlePreviousPage}
+          isDisabled={!hasPreviousPage}
+          isLoading={loading}
+        >
+          Anterior
+        </PrimaryButton>
+      </Link>
       <Text mx="4" aria-label="Page count" role="contentinfo">
         {Math.floor(offset / PAGINATION_LIMIT) + 1}/
         {Math.ceil(total / PAGINATION_LIMIT)}
       </Text>
-      <PrimaryButton
-        aria-label="Next page"
-        onClick={handleNextPage}
-        isDisabled={!hasNextPage}
-        isLoading={loading}
-      >
-        Siguiente
-      </PrimaryButton>
+      <Link href="#catalog" style={{ textDecoration: 'none' }}>
+        <PrimaryButton
+          aria-label="Next page"
+          onClick={handleNextPage}
+          isDisabled={!hasNextPage}
+          isLoading={loading}
+        >
+          Siguiente
+        </PrimaryButton>
+      </Link>
     </Flex>
   );
 };
