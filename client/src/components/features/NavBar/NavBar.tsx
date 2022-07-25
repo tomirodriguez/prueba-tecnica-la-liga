@@ -22,14 +22,15 @@ export const NavBar: FC = () => {
       position={'sticky'}
       top={0}
       bg={`${colorMode}.primary.main`}
-      color="white"
       shadow={'2xl'}
       align="center"
       py={2}
     >
       <ResponsiveContainer>
         <Flex minWidth="max-content" alignItems="center" gap="2">
-          <Heading size="md">LaLiga App</Heading>
+          <Heading size="md" color="white">
+            LaLiga App
+          </Heading>
           <Spacer />
 
           <Box mr="4">
@@ -42,6 +43,7 @@ export const NavBar: FC = () => {
               bg={'transparent'}
               color="white"
               _focus={{ outline: 'none' }}
+              _hover={{ color: 'white', bg: 'red.500' }}
             >
               Cerrar Sesión
             </Button>

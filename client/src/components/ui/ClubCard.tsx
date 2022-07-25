@@ -72,9 +72,9 @@ export const ClubCard: FC<Props> = ({
                 onChange={handleSwitchChange}
                 id={`favorite-${club.id}`}
                 size="md"
-                colorScheme={'blue'}
                 isChecked={club.favorite}
                 isDisabled={isTogglingFavorite}
+                colorScheme={'whatsapp'}
                 _focus={{
                   outline: 'none',
                   border: 'none',

@@ -50,6 +50,7 @@ export const SearchBox: FC = () => {
             bg={`${colorMode}.secondary.main`}
             color="white"
             children={<SearchIcon />}
+            _hover={{ bg: `${colorMode}.secondary.dark` }}
           />
           <Input
             role={'searchbox'}
@@ -62,11 +63,11 @@ export const SearchBox: FC = () => {
             onChange={handleInputChange}
             _focus={{
               outline: 'none',
-              borderColor: `${colorMode}.secondary.main`,
+              borderColor: `${colorMode}.secondary.dark`,
             }}
             _hover={{
               outline: 'none',
-              borderColor: `${colorMode}.secondary.main`,
+              borderColor: `${colorMode}.secondary.dark`,
             }}
           />
           <InputRightAddon
