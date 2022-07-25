@@ -13,11 +13,12 @@ type Props = {
 
 export const ClubList: FC<Props> = ({ templateColumns }) => {
   const dispatch = useAppDispatch();
-  const { loading, clubs } = useClubsCatalogSelector();
+  const { loading: loadingClubs, clubs } = useClubsCatalogSelector();
   const { loading: togglingFavorite, clubUpdatedId } =
     useFavoriteTogglerSelector();
 
-  if (loading) return <SkeletonClubList />;
+  if (loadingClubs)
+    return <SkeletonClubList templateColumns={templateColumns} />;
 
   const handleFavoriteToggle = (clubId: string, favorite: boolean) => {
     dispatch(toggleClubFavoriteRequest({ clubId, favorite }));
