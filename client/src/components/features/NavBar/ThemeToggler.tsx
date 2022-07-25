@@ -14,6 +14,7 @@ export const ThemeToggler: FC = () => {
         p="0"
         onClick={toggleColorMode}
         rounded="full"
+        bg={'transparent'}
         _hover={{
           background: 'transparent',
         }}
