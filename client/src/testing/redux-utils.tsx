@@ -3,7 +3,6 @@ import type { RenderOptions } from '@testing-library/react';
 import { render } from '@testing-library/react';
 import { FC, PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
-
 import type { AppStore, RootState } from '../redux';
 import { setupStore } from '../redux';
 

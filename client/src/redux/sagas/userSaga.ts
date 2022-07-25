@@ -38,4 +38,4 @@ function* userSaga() {
   yield takeLatest(logoutRequest, endSession);
 }
 
-export default userSaga;
+export { userSaga };

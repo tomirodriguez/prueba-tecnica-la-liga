@@ -5,7 +5,7 @@ import {
   INVALID_USER_ERROR,
   INVALID_TOKEN_ERROR,
 } from '../../services/constants';
-import userSaga from '../sagas/userSaga';
+import { userSaga } from '../sagas/userSaga';
 import {
   authReducer,
   AuthState,

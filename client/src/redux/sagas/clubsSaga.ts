@@ -61,4 +61,4 @@ function* clubsSaga() {
   yield takeLatest(toggleClubFavoriteRequest, toggleFavorite);
 }
 
-export default clubsSaga;
+export { clubsSaga };

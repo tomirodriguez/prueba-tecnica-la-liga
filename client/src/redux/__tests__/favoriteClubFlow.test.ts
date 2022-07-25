@@ -3,7 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import { CombinedState, combineReducers } from 'redux';
 import SagaTester from 'redux-saga-tester';
 import { DUMMY_CLUB, DUMMY_CLUB_API_RESPONSE } from '../../testing/mocks/club';
-import clubsSaga from '../sagas/clubsSaga';
+import { clubsSaga } from '../sagas/clubsSaga';
 import { clubsCatalogSlice, ClubsCatalogState } from '../slices/clubsCatalog';
 import { clubsCatalogReducer } from '../slices/clubsCatalog/clubsCatalogSlice';
 import {
