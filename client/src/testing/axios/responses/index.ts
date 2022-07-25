@@ -1,2 +1,1 @@
-export * from './axiosGetClubsDefaultResponse';
-export * from './axiosGetClubsDefaultFavoriteResponse';
+export * from './clubsResponses';

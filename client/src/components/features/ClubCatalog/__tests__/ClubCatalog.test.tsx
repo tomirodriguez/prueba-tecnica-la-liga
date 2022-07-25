@@ -1,24 +1,12 @@
-import {
-  fireEvent,
-  screen,
-  waitFor,
-  within,
-  prettyDOM,
-} from '@testing-library/react';
+import { fireEvent, screen, waitFor, within } from '@testing-library/react';
 
 import {
   axiosMock,
-  AXIOS_GET_CLUBS_DEFAULT_FAVORITE_RESPONSE,
-  AXIOS_GET_CLUBS_DEFAULT_RESPONSE,
+  getMockedClubs,
   renderWithProviders,
-  responseToClub,
 } from '../../../../testing';
 
-import { clubsCatalogSlice } from '../../../../redux/slices/clubsCatalog/clubsCatalogSlice';
-import { AXIOS_GET_CLUBS_DEFAULT_NOT_FAVORITE_RESPONSE } from '../../../../testing/axios/responses/axiosGetClubsDefaultNotFavoriteResponse';
 import { ClubCatalog } from '../ClubCatalog';
-import { GetClubsProps } from '../../../../services';
-import { AxiosRequestConfig } from 'axios';
 
 // Se hace un mock del useMediaQuery ya que no existe "window" en los tests.
 // Si no se hiciese, romperia el test por no estar definida.
@@ -39,12 +27,14 @@ describe('<Catalog>', () => {
     axiosMock.reset();
   });
 
-  it('should render all the clubs in the store', async () => {
-    axiosMock
-      .onGet('/api/clubs', { limit: 6, offset: 0, name_like: '' })
-      .reply(200, AXIOS_GET_CLUBS_DEFAULT_RESPONSE);
+  it('should render the clubs in the store when loaded', async () => {
+    axiosMock.onGet('/api/clubs').reply(200, getMockedClubs({}));
 
     renderWithProviders(<ClubCatalog />);
+
+    const searchBox = screen.getByRole('searchbox', {
+      name: 'Search club by name',
+    });
 
     await waitFor(() => {
       expect(
@@ -52,34 +42,15 @@ describe('<Catalog>', () => {
       ).toHaveLength(6);
     });
 
-    expect(screen.getByText('Se encontraron 20 clubes.')).toBeInTheDocument();
-
-    const catalog = screen.getByRole('list', { name: 'Club Catalog' });
-
-    expect(catalog.childElementCount).toBe(6);
+    expect(searchBox).toHaveTextContent('Se encontraron 20 clubes.');
   });
 
   it('should filter by favorites correctly', async () => {
     axiosMock
       .onGet('/api/clubs', { limit: 6, offset: 0, name_like: '' })
-      .reply((config) => {
-        if (config.params.favorite === true)
-          return [200, AXIOS_GET_CLUBS_DEFAULT_FAVORITE_RESPONSE];
-        else if (config.params.favorite === false)
-          return [200, AXIOS_GET_CLUBS_DEFAULT_NOT_FAVORITE_RESPONSE];
-        else return [200, AXIOS_GET_CLUBS_DEFAULT_RESPONSE];
-      });
+      .reply((config) => [200, getMockedClubs({ ...config.params })]);
 
-    renderWithProviders(<ClubCatalog />, {
-      preloadedState: {
-        clubs: {
-          ...clubsCatalogSlice.getInitialState(),
-          clubs: responseToClub(AXIOS_GET_CLUBS_DEFAULT_RESPONSE.results),
-          total: 20,
-          loading: false,
-        },
-      },
-    });
+    renderWithProviders(<ClubCatalog />);
 
     const filters = screen.getByRole('list', { name: 'Favorite filter' });
 
@@ -87,10 +58,14 @@ describe('<Catalog>', () => {
     const favorites = within(filters).getByText('Favoritos');
     const notFavorites = within(filters).getByText('No favoritos');
 
+    const searchBox = screen.getByRole('searchbox', {
+      name: 'Search club by name',
+    });
+
     await waitFor(() => {
       expect(
-        screen.getByRole('list', { name: 'Club Catalog' })
-      ).toBeInTheDocument();
+        screen.getByRole('list', { name: 'Club Catalog' }).childElementCount
+      ).toBe(6);
     });
 
     fireEvent.click(favorites);
@@ -98,16 +73,20 @@ describe('<Catalog>', () => {
     await waitFor(() => {
       expect(
         screen.getByRole('list', { name: 'Club Catalog' }).childElementCount
-      ).toBe(2);
+      ).toBe(4);
     });
+
+    expect(searchBox).toHaveTextContent('Se encontraron 4 clubes.');
 
     fireEvent.click(notFavorites);
 
     await waitFor(() => {
       expect(
         screen.getByRole('list', { name: 'Club Catalog' }).childElementCount
-      ).toBe(4);
+      ).toBe(6);
     });
+
+    expect(searchBox).toHaveTextContent('Se encontraron 16 clubes.');
 
     fireEvent.click(all);
 
@@ -116,5 +95,7 @@ describe('<Catalog>', () => {
         screen.getByRole('list', { name: 'Club Catalog' }).childElementCount
       ).toBe(6);
     });
+
+    expect(searchBox).toHaveTextContent('Se encontraron 20 clubes.');
   });
 });

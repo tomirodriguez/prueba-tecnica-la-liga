@@ -10,6 +10,7 @@ export const ClubCatalog: FC = () => {
   useEffect(() => {
     dispatch(clubsRequest());
   }, [dispatch]);
+
   // const dispatch = useAppDispatch();
   // const { loading: loadingClubs, clubs } = useClubsCatalogSelector();
   // const { loading: togglingFavorite, clubUpdatedId } =

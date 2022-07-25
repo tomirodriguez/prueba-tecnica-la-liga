@@ -25,7 +25,7 @@ export const SearchBox: FC = () => {
   };
 
   return (
-    <>
+    <Box title="Search club by name" role={'searchbox'}>
       <form onSubmit={handleFormSubmit}>
         <InputGroup bg={'white'} rounded="md">
           <InputLeftAddon
@@ -40,11 +40,11 @@ export const SearchBox: FC = () => {
           />
         </InputGroup>
       </form>
-      <Box mt={2} fontSize="sm">
+      <Box mt={2} fontSize="sm" title="Search results">
         {total === 0 && <Text>No se encontraron clubes.</Text>}
         {total === 1 && <Text>Se encontro 1 club.</Text>}
         {total > 1 && <Text>Se encontraron {total} clubes.</Text>}
       </Box>
-    </>
+    </Box>
   );
 };
