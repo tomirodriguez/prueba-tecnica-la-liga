@@ -13,7 +13,7 @@ import { useClubsCatalogSelector } from '../../../../redux';
 
 export const SearchBox: FC = () => {
   const applyFilter = useNameFilter();
-  const { total } = useClubsCatalogSelector();
+  const { total, loading } = useClubsCatalogSelector();
   const inputRef = useRef<HTMLInputElement>(null);
   const { colorMode } = useColorMode();
 
@@ -54,10 +54,14 @@ export const SearchBox: FC = () => {
           />
         </InputGroup>
       </form>
-      <Box mt={2} fontSize="sm" title="Search results">
-        {total === 0 && <Text>No se encontraron clubes.</Text>}
-        {total === 1 && <Text>Se encontró 1 club.</Text>}
-        {total > 1 && <Text>Se encontraron {total} clubes.</Text>}
+      <Box mt={2} h="6" fontSize="sm" title="Search results">
+        {!loading && (
+          <>
+            {total === 0 && <Text>No se encontraron clubes.</Text>}
+            {total === 1 && <Text>Se encontró 1 club.</Text>}
+            {total > 1 && <Text>Se encontraron {total} clubes.</Text>}
+          </>
+        )}
       </Box>
     </Box>
   );
