@@ -13,7 +13,7 @@
     "prettier:check": "yarn prettier --check client/",
     "prepare": "husky install",
     "pre-commit": "yarn lint && yarn prettier:check && yarn typecheck:client",
-    "pre-push": " yarn pre-commit && yarn typecheck:client && cd client && yarn test"
+    "pre-push": " yarn pre-commit && cd client && yarn test"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.18.6",
