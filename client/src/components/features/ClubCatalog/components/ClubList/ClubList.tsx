@@ -1,9 +1,8 @@
 import { Grid, GridItem, ResponsiveValue } from '@chakra-ui/react';
 import { FC } from 'react';
 import { useClubsCatalogSelector } from '../../../../../hooks';
-import { useAppDispatch } from '../../../../../hooks/useAppDispatch';
+import { useFavoriteToggler } from '../../../../../hooks/useFavoriteToggler';
 import { useFavoriteTogglerSelector } from '../../../../../hooks/useFavoriteTogglerSelector';
-import { toggleClubFavoriteRequest } from '../../../../../redux/slices/favoriteToggler';
 import { ClubCard, NoClubsFound } from '../../../../ui';
 import { SkeletonClubList } from '../../../../ui/SkeletonClubList';
 
@@ -12,7 +11,7 @@ type Props = {
 };
 
 export const ClubList: FC<Props> = ({ templateColumns }) => {
-  const dispatch = useAppDispatch();
+  const toggleFavorite = useFavoriteToggler();
   const { loading: loadingClubs, clubs } = useClubsCatalogSelector();
   const { loading: togglingFavorite, clubUpdatedId } =
     useFavoriteTogglerSelector();
@@ -21,7 +20,7 @@ export const ClubList: FC<Props> = ({ templateColumns }) => {
     return <SkeletonClubList templateColumns={templateColumns} />;
 
   const handleFavoriteToggle = (clubId: string, favorite: boolean) => {
-    dispatch(toggleClubFavoriteRequest({ clubId, favorite }));
+    toggleFavorite(clubId, favorite);
   };
 
   if (clubs.length === 0) return <NoClubsFound />;

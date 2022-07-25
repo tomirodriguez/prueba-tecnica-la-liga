@@ -1,20 +1,14 @@
 import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
 import { FC, useEffect } from 'react';
-import { useAppDispatch } from '../../../hooks';
-import { clubsRequest } from '../../../redux/slices/clubsCatalog';
+import { useCatalog } from '../../../hooks/useCatalog';
 import { ClubList, Filters, Pagination, SearchBox } from './components';
 
 export const ClubCatalog: FC = () => {
-  const dispatch = useAppDispatch();
+  const updateCatalog = useCatalog();
 
   useEffect(() => {
-    dispatch(clubsRequest());
-  }, [dispatch]);
-
-  // const dispatch = useAppDispatch();
-  // const { loading: loadingClubs, clubs } = useClubsCatalogSelector();
-  // const { loading: togglingFavorite, clubUpdatedId } =
-  //   useFavoriteTogglerSelector();
+    updateCatalog();
+  }, [updateCatalog]);
 
   return (
     <Box as="section" id="catalog">

@@ -1,23 +1,22 @@
 import { Flex, Link, Text } from '@chakra-ui/react';
 import { FC } from 'react';
 import { PAGINATION_LIMIT } from '../../../../constants';
-import { useAppDispatch } from '../../../../hooks/useAppDispatch';
+import { useCatalog } from '../../../../hooks';
 import { useClubsCatalogSelector } from '../../../../hooks/useClubsCatalogSelector';
-import { clubsRequest } from '../../../../redux/slices/clubsCatalog';
 import { PrimaryButton } from '../../../ui/PrimaryButton';
 
 export const Pagination: FC = () => {
   const { total, offset, loading } = useClubsCatalogSelector();
-  const dispatch = useAppDispatch();
+  const updateCatalog = useCatalog();
 
   if (total === 0) return null;
 
   const handleNextPage = () => {
-    dispatch(clubsRequest({ offset: offset + PAGINATION_LIMIT }));
+    updateCatalog({ offset: offset + PAGINATION_LIMIT });
   };
 
   const handlePreviousPage = () => {
-    dispatch(clubsRequest({ offset: offset - PAGINATION_LIMIT }));
+    updateCatalog({ offset: offset - PAGINATION_LIMIT });
   };
 
   const hasPreviousPage = offset - PAGINATION_LIMIT >= 0;

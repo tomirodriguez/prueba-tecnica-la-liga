@@ -132,4 +132,4 @@ DONT FORGET!!!
   Agregar explicacion de env.template
   Agregar handleo de bad request en clubs si tengo tiempo
   Mensaje de error en login form - explicacion accesibilidad
-  
+  Doble llamada del check user -> justificacion: podria ser una funcion que recoja datos del usuario
