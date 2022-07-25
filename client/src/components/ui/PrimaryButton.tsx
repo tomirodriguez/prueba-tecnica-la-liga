@@ -5,7 +5,7 @@ export const PrimaryButton: FC<ButtonProps> = ({ children, ...props }) => {
   const { colorMode } = useColorMode();
   return (
     <Button
-      bg={`${colorMode}.secondary.light`}
+      bg={`${colorMode}.secondary.main`}
       color="white"
       _hover={{ bg: `${colorMode}.secondary.dark` }}
       _focus={{ outline: 'none' }}

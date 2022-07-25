@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   ButtonGroup,
   Flex,
   Heading,
@@ -9,7 +10,6 @@ import {
 import { FC } from 'react';
 import { useLogout } from '../../../hooks';
 import { ResponsiveContainer } from '../../../layouts';
-import { PrimaryButton } from '../../ui';
 import { ThemeToggler } from './ThemeToggler';
 
 export const NavBar: FC = () => {
@@ -37,7 +37,14 @@ export const NavBar: FC = () => {
           </Box>
 
           <ButtonGroup gap="2">
-            <PrimaryButton onClick={logout}>Cerrar Sesión</PrimaryButton>
+            <Button
+              onClick={logout}
+              bg={'transparent'}
+              color="white"
+              _focus={{ outline: 'none' }}
+            >
+              Cerrar Sesión
+            </Button>
           </ButtonGroup>
         </Flex>
       </ResponsiveContainer>

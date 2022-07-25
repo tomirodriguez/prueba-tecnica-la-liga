@@ -1,30 +1,43 @@
-import { SearchIcon } from '@chakra-ui/icons';
+import { CloseIcon, SearchIcon } from '@chakra-ui/icons';
 import {
   Box,
   Input,
   InputGroup,
   InputLeftAddon,
+  InputRightAddon,
   Text,
   useColorMode,
 } from '@chakra-ui/react';
-import { FC, SyntheticEvent, useRef } from 'react';
+import { FC, SyntheticEvent, useRef, useState, ChangeEvent } from 'react';
 import { useNameFilter } from '../../../../hooks';
 import { useClubsCatalogSelector } from '../../../../redux';
 
 export const SearchBox: FC = () => {
   const applyFilter = useNameFilter();
-  const { total, loading } = useClubsCatalogSelector();
+  const { total, loading, nameFilter } = useClubsCatalogSelector();
   const inputRef = useRef<HTMLInputElement>(null);
   const { colorMode } = useColorMode();
+  const [newNameFilter, setNewNameFilter] = useState('');
 
   const handleFormSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
 
-    if (!inputRef.current) return;
+    applyFilter(newNameFilter);
+  };
 
-    const nameFilter = inputRef.current.value;
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setNewNameFilter(event.target.value);
+  };
 
-    applyFilter(nameFilter);
+  const clearSearch = () => {
+    if (nameFilter) {
+      applyFilter('');
+      setNewNameFilter('');
+    }
+  };
+
+  const focusInput = () => {
+    inputRef.current?.focus();
   };
 
   return (
@@ -32,7 +45,9 @@ export const SearchBox: FC = () => {
       <form onSubmit={handleFormSubmit}>
         <InputGroup bg={'white'} rounded="lg" borderColor={'transparent'}>
           <InputLeftAddon
-            bg={`${colorMode}.secondary.light`}
+            cursor={'pointer'}
+            onClick={focusInput}
+            bg={`${colorMode}.secondary.main`}
             color="white"
             children={<SearchIcon />}
           />
@@ -43,6 +58,8 @@ export const SearchBox: FC = () => {
             backgroundColor={`${colorMode}.bg.card`}
             placeholder="Qué club desea buscar"
             ref={inputRef}
+            value={newNameFilter}
+            onChange={handleInputChange}
             _focus={{
               outline: 'none',
               borderColor: `${colorMode}.secondary.main`,
@@ -51,6 +68,13 @@ export const SearchBox: FC = () => {
               outline: 'none',
               borderColor: `${colorMode}.secondary.main`,
             }}
+          />
+          <InputRightAddon
+            cursor={'pointer'}
+            onClick={clearSearch}
+            bg={`gray`}
+            color="white"
+            children={<CloseIcon />}
           />
         </InputGroup>
       </form>

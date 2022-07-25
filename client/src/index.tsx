@@ -9,7 +9,7 @@ import { App } from './App';
 import { setupStore } from './redux';
 import reportWebVitals from './reportWebVitals';
 import './styles/global.css';
-import { lightTheme } from './themes/lightTheme';
+import { theme } from './themes/theme';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,10 +17,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <StrictMode>
-    <ChakraProvider theme={lightTheme} resetCSS>
+    <ChakraProvider theme={theme} resetCSS>
       <Provider store={setupStore()}>
         <BrowserRouter>
-          <ColorModeScript initialColorMode={lightTheme.initialColorMode} />
+          <ColorModeScript initialColorMode={theme.initialColorMode} />
           <App />
         </BrowserRouter>
       </Provider>
