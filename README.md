@@ -53,6 +53,15 @@ yarn && yarn start
   <br />
   <br />
 
+## Instalación de dependencias en raiz
+
+```bash
+yarn
+```
+
+  <br />
+  <br />
+
 # Memoria
 
 ## Variables de entorno
