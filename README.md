@@ -53,83 +53,199 @@ yarn && yarn start
   <br />
   <br />
 
-## Memoria
+# Memoria
 
-Librerias:
+## Variables de entorno
 
-Husky: para ejectuar git hooks. Permite que el codigo que querramos subir al repositorio este libre de errores, impidiendo la subida/commit si los hubiese.
-Se utilizara solamente el typecheck del cliente para agilizar los commits, sabiendo que el servidor no sera modificado y cumple con los requerimientos.
+Se debe crear un archivo `.env.development` a partir de `.env.template`. 
 
-Prettier: para validar la escritura de codigo.
+```javascript
+// Representa la URL de la API
+REACT_APP_API_URL=
 
-Eslint: se instalaron las dependencias necesarias y se realizo la configuracion correspondiente para trabajar con prettier, para detectar errores dentro del codigo.
+// Valor opcional
+// Si se pone en true va a simular un delay en la conexion
+// Sirve si se quiere ver mas en detalle los "loadings"
+REACT_APP_MOCK_DELAY=
+```
 
-Redux: Para el manejo de estados se utiliza redux y react-redux
+## Librerias
 
-Saga: Para aplicar middlewares se utilizara redux-saga
+### Husky
 
-Axios: Para la llamada a la api. Tiene buena integracion con typescript y, a mi criteriom, una sintaxis mas limpia que el fetch nativo.
+---
+Permite facilitar la creacion de Git Hooks.
+La he utilizado para verificar que el codigo que se sube al repositorio este lo mas libre de errores posible.
 
-React-router-dom: Para manejar las rutas de la SPA
+Se realizan dos verificaciones distintas para agilizar tiempos: una antes de realizar un commit y la otra antes de realizar un push. En el primer caso solo se verifica typechecks, eslint y prettier, mientras que al segundo se le agregan los tests.
 
-Jest para manejar los tests suites
+</br>
 
-axios-mock-adapter: Para poder realizar tests con mayor facilidad mockeando las respuestas
+### Pretier y Eslint
 
-Chakra-icons: pack de iconos de la libreria de chakra
+---  
+Para validar la escritura de codigo. Se instalaron librerias secundarias para que no interfieran entre ellas.
 
-redux-saga-tester: to test sagas e2e
+</br>
+
+### Redux
+
+---  
+Para tener un estado global dentro de la aplicacion
+
+</br>
+
+### Redux-Saga
+
+---  
+Se aplican middlewares a Redux con Redux-Saga para soportar llamadas asincronas a la api.
+
+</br>
+
+### Redux-saga-tester
+  
+---
+Facilitar el testing de redux-saga, pudiendo aplicarlos sobre la totalidad del flujo de la saga y verificar el correcto flujo de los mismos. Recomendada por la documentacion de Redux-Saga
+
+</br>
+
+### Axios
+
+---
+Para realizar llamadas a la api. La utilizo principalmente porque tiene buena integracion con typescript y, a mi criteriom, una sintaxis mas limpia que el fetch nativo. Tambien me permite con mayor facilidad realizar mocks de las llamadas para poder hacer testing.
+
+</br>
+
+### Axios Mock Adaptar
+
+---
+Siguiendo con Axios, esta libreria es la que me permite realizar mocks de las respuestas de la api con muchisima facilidad y simpleza.
+
+</br>
+
+### React-router-dom
+
+---  
+Para manejar las distintas rutas de la aplicacion y las redirecciones en la misma.
+
+</br>
+
+### Jest
+
+---  
+Para organizar los tests que se realizaron.
+
+</br>
+
+### Chakra-icons
+
+---
+Se agrego ademas de Chakra UI para poder contar con iconos dentro de la aplicacion.
 
 
-Custom scripts:
+</br>
 
-typecheck: para evaluar que el codigo typescript no tenga errores. Se puede ejecutar en todo el proyecto como solo en el cliente o servidor con algunas de sus variantes.
+## Custom scripts
 
-lint: para correr eslint dentro del cliente
+```bash
+typecheck
+typecheck:client
+typecheck:server
+```
 
-pre-commit -> checkea prettier y eslint
+>Para evaluar que el codigo typescript no tenga errores. Se puede ejecutar tanto en todo el proyecto como solo en el cliente o servidor con algunas de sus variantes.
 
-pre-push -> checkea tsc, prettier, eslint y tests
+</br>
 
+```bash
+lint
+```
 
-Casos de redireccion:
-  Siempre al iniciar la aplicacion se checkea si hay una sesion abierta, independientemente de la url pedida.
-  Una vez checkeado, se procede a ir a la pantalla solicitada, en donde si se quiere ir al login y ya hay una sesion abierta, es redirigido a /clubs. Caso contrario, el componente <RequireAuth> se va a encargar de redireccionar cualquier url al /login
+>Para correr eslint dentro del cliente
 
-GitHooks:
-  antes de realizar un commit se ejecutan el script pre-commit 
-  antes de realizar un push se ejecutan el script pre-push 
+</br>
 
+```bash
+pre-commit
+```
 
-environment variables:
+>checkea prettier, eslint y typecheck
 
-template en .env.template
+</br>
 
-token:
-  Cualquier solucion que pueda utilizar desde front, va a tener pros y contras.
-  Tanto si la guardo en localstorage como en una cookie, hay bulnerabilidad y riesgo de tener una perdida de informacion frente a ataques. Se pueden recibir ataques XSS en el primer caso, o CSRF en el segundo.
+```bash
+pre-push
+```
 
-  Otra opcion es guardarla en memoria, lo cual tendria seguridad frente a estos ataques, pero esto haria que ante cualquier refresh el token se pierda y tengamos que realizar el login de nuevo.
+>Corre pre-commit y tests del cliente
 
-  La solucion que optaria en un ambiente productivo real, seria guardar un refresh token en una cookie http only y el token en memoria, pero para ello deberia haber una implementacion del lado del servidor que haga match con los endpoints que provee la api.
+</br>
 
+## Redirecciones
 
-ClubsCatalogSlice:
+Siempre al iniciar la aplicacion se checkea si hay una sesion abierta, independientemente de la url pedida.
 
-  En el catalogo, decidi guardar el offset ya que se necesita saber que pagina del catalogo estoy viendo. Esta pagina solamente cambia cuando efectivamente la busqueda se realizo correctamente y podria pasar de a una o mas pagians si asi se quisiera.
+Una vez checkeado, se procede a ir a la pantalla solicitada teniendo en cuenta los siguientes casos:
 
-  Caso distinto fueron las busquedas por nombre o favoritos, ya que las tome como un filtro mas que una opcion de busqueda, por lo que el catalogo sabe que filtros tiene aplicados, sean nombre, favoritos, o ambos, y estos pueden ser actualizados mediante sus acciones, para luego efectivamente realizar la busqueda.
+- Si se quiere ir al login y ya hay una sesion abierta, es redirigido a /clubs.
+- Si no hay sesion abierta y se quiere acceder a cualquier parte del sitio, el componente `<RequireAuth>` se va a encargar de redireccionar cualquier url al /login
 
-  Esta division se realizo fundamentalmente para solucionar el problema de la paginacion, ya que el paginador no deberia por que saber que filtros tiene aplicado el catalogo, sino a que pagina del mismo ir.
+</br>
 
+## GitHooks:
 
-DONT FORGET!!!
-  Poner de nuevo strict mode.
-  Sacar el boton de autologin
-  Remover/opcional delays en requests para ver pantallas de loading
-  Handle errores en una funcion externa y yields de session expired
-  Explicar por que uni tests de redux y sagas
-  Agregar explicacion de env.template
-  Agregar handleo de bad request en clubs si tengo tiempo
-  Mensaje de error en login form - explicacion accesibilidad
-  Doble llamada del check user -> justificacion: podria ser una funcion que recoja datos del usuario
+- antes de realizar un commit se ejecuta el script pre-commit.
+  
+- antes de realizar un push se ejecutan el script pre-push.
+  
+## Consideraciones y decisiones tomadas
+
+### Token
+
+---
+Cualquier solucion que pueda utilizar desde front, va a tener pros y contras.
+Tanto si la guardo en localStorage como en una Cookie, hay bulnerabilidad y riesgo de tener una perdida de informacion frente a ataques. Se pueden recibir ataques XSS en el primer caso, o CSRF en el segundo.
+
+Otra opcion es guardarla en memoria, lo cual tendria seguridad frente a estos ataques, pero esto haria que ante cualquier refresh el token se pierda y tengamos que realizar el login de nuevo.
+
+La solucion que optaría en un ambiente productivo real, seria guardar un `refreshToken` en una cookie `http only` y el `token` en memoria, pero para ello deberia haber una implementacion del lado del servidor para que esto funcione correctamente.
+
+</br>
+
+### ClubsCatalogSlice
+
+---
+Este Slice va a representar el catalogo entero de clubes, como si fuera una revista. Siguiendo esta logica, debe conocer que pagina esta viendo y poder hacer separar informacion de acuerdo a la necesidad del usuario, provista por filtros: `nombre` y `favorito`.
+
+- El `offset` solo sera actualizado si efectivamente puede "pasar de página".
+
+- Al catalogo se le pueden aplicar criterios de busqueda (filtros), pero este no se va a actualizar hasta que se haga efectiva una busqueda con estos criterios solicitados. Esto permite poder filtrar no solo por favoritismo o nombre, sino por ambos dos a la vez.
+
+</br>
+
+### Testing: Redux & Sagas
+
+---
+Los testeos del store de Redux y las Sagas las realice en conjunto ya que van a vivir comunicandose durante toda la aplicacion. Me parecio mas interesante hacer algo integral que realizar testeos por separados de cada uno.
+
+A la vez, al utilizar `SagaTester` de `redux-saga-tester`, me permite realizar esto de una manera super sencilla y limpia.
+
+### Login Form - aria-errormessage
+
+---
+Al ver que la libreria de ChakraUI no tiene implementado el aria-errormessage en su Input dentro de un FormGroup, agrega la propiedad fuera de al libreria para mejorar la accesibilidad de la misma.
+
+Se puede ver que no existe en el test the `<Authentication />` en donde a pesar de haber un error, no lo detecta con  el `expect(...).toHaveErrorMessage()`.
+
+</br>
+
+### Check User - Doble llamada
+
+---
+Para verificar si hay una sesion abierta, cree un metodo `checkUser` que valida esto. Lo que hace por detras es un request a la api para obtener clubes mediante `api/clubs`.
+
+No obstante, si esta solicitud es completada y efectivamente hay un usuario, estos datos no se van a guardar en ningun lado. La razon detras de esto es que en una aplicacion real, deberia haber algun metodo para traer la informacion del usuario (nombre, email, profile, etc.). Teniendo este método, sí guardaria esta informacion dentro del perfil de usuario, que actualmente esta vacio en todo momento.
+
+Actualmente, a pesar de hacer esa llamada para checkear al usuario, el catalogo vuelve hacer una llamada para obtener el listado de clubes, ya que es quien realmente deberia obtener esa informacion, y no un metodo para checkear si hay un usuario.
+
+Si bien en la practica podria funcionar, no me gustaria depender de obtener los datos a traves de este metodo, ya que si el dia de manana hay un usuario y necesito obtener su datos para ver si hay una sesion abierta, tendria que delegar la busqueda del catalogo a otro lado ya que quien me brindaba la informacion anteriormente no lo estaria haciendo mas.
