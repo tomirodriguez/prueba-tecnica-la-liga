@@ -1,4 +1,4 @@
-export * from './userSessionServices';
+export * from './authServices';
 export * from './getClubs';
 export * from './toggleClubFavorite';
 export * from './types';
